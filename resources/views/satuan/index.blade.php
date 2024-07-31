@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/satuan/create" role="button"><i class="bi bi-hdd-stack"></i>  Tambah satuan</a>
+    <a class="btn btn-primary float-end" href="/satuan/create" Roles="button"><i class="bi bi-hdd-stack"></i>  Tambah satuan</a>
     <h1 class="h3 mb-4">Jenis satuan</h1>
    
 

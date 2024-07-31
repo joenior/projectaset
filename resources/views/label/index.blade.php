@@ -1,11 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    @if(auth()->user()->roles === 'kepalausaha')
-        <h1 class="h3 mb-4">Cetak Label {{ auth()->user()->lokasi->nama_lokasi }}</h1>
-    @else
-        <h1 class="h3 mb-4">Cetak Label {{ auth()->user()->roles}}</h1>
-    @endif
+    <h1 class="h3 mb-4">Cetak Label</h1>
     
     <div class="row">
         <div class="col">
@@ -32,7 +28,7 @@
                                         <td>{{ $barang->nama }}</td>
                                         <td>{{ $barang->lokasi->nama_lokasi }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" role="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
+                                            <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
                                         </td>
                                     </tr>  
                                 @endforeach                     

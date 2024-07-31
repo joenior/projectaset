@@ -16,18 +16,9 @@ class GrafikController extends Controller
 {
     public function index()
     {
-        $userLogin = auth()->user()->roles;
-
-        if($userLogin == 'kepalausaha'){
-            $barang = Barang::selectRaw('YEAR(tanggal) as tahun, COUNT(*) as total')
-                        ->where('user_id', auth()->user()->id)
-                        ->groupBy('tahun')
-                        ->get();
-        } else {
-            $barang = Barang::selectRaw('YEAR(tanggal) as tahun, COUNT(*) as total')
-                        ->groupBy('tahun')
-                        ->get();
-        }
+        $barang = Barang::selectRaw('YEAR(tanggal) as tahun, COUNT(*) as total')
+                    ->groupBy('tahun')
+                    ->get();
 
         $chart = new \stdClass();
         $chart->type    = 'bar';
@@ -38,7 +29,6 @@ class GrafikController extends Controller
         $countLokasi    = Lokasi::all()->count();
         $countKategori  = Kategori::all()->count();
         $countUsers     = User::all()->count();
-
 
         return view('/home', [
             'users'         => Auth::user(),

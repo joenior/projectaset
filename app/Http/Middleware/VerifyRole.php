@@ -12,10 +12,8 @@ class VerifyRole
     {
         $user = $request->user();
 
-        foreach ($roles as $role) {
-            if ($user->roles($role)) {
-                return $next($request);
-            }
+        if ($user->roles === 'admin') {
+            return $next($request);
         }
 
         abort(403, 'Unauthorized action.');

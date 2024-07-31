@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/lokasi/create" role="button"><i class="bi bi-geo-alt"></i> Tambah Lokasi</a>
+    <a class="btn btn-primary float-end" href="/lokasi/create" Roles="button"><i class="bi bi-geo-alt"></i> Tambah Lokasi</a>
     <h1 class="h3 mb-4">Data Lokasi</h1>
    
 

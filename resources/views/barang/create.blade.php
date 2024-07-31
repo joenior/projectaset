@@ -4,15 +4,8 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/barang/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
-        <h1 class="h3 mb-4">
-            @if(auth()->user()->roles === 'kepalausaha')
-                <h1 class="h3 mb-4">Tambah Barang Baru Di {{ auth()->user()->lokasi->nama_lokasi }}</h1>
-            @else
-                <h1 class="h3 mb-4">Tambah Barang Untuk {{ auth()->user()->roles}}</h1>
-            @endif
-        
-        </h1>
+        <a class="btn btn-secondary float-end" href="/barang/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <h1 class="h3 mb-4">Tambah Barang Baru</h1>
        
         <div class="row">
             <div class="col">
@@ -76,7 +69,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="satuan" class="form-label">Lokasi</label>
+                                <label for="satuan" class="form-label">Satuan</label>
                                 <select class="form-select" aria-label="Default select example" id="satuan" name="satuan_id">
                                     @foreach ($satuans as $satuan)
                                         @if (old('satuan_id') == $satuan->id)
@@ -117,14 +110,11 @@
             </div>
         </div>
     </div>
-</div>
 
 <script>
     function previewImage(){
         preview.src=URL.createObjectURL(event.target.files[0]);
     }
 </script>
-
-
 
 @endsection

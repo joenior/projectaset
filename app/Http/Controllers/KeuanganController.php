@@ -17,20 +17,14 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $userLogin = auth()->user()->roles;
-
-        if($userLogin == 'kepalausaha'){
-            $hargaBarangs = Barang::where('user_id', auth()->user()->id)->get();
-        } else {
-            $hargaBarangs = Barang::all();
-        }
+        $hargaBarangs = Barang::all();
 
         return view('keuangan.index', [
             'users'             => Auth::user(),
             'hargaBarangs'      => $hargaBarangs,
             'lokasis'           => Lokasi::all(),
             'totalHarga'        => Barang::sum('harga'),
-            'totalHargaUsaha'   => Barang::where('user_id', auth()->user()->id)->sum('harga')
+            'totalHargaUsaha'   => Barang::sum('harga')
         ]);
     }
 
@@ -84,14 +78,7 @@ class KeuanganController extends Controller
 
     public function cetakLaporanKeuangan()
     {
-        // periksa role user yang sedang login
-        $userLogin = auth()->user()->roles;
-
-        if($userLogin == 'kepalausaha'){
-            $hargaBarangs = Barang::where('user_id', auth()->user()->id)->get();
-        } else {
-            $hargaBarangs = Barang::all();
-        }
+        $hargaBarangs = Barang::all();
 
         $logoInstansiPath = storage_path('app/public/logo-instansi/logo.png');
         $logoInstansi = base64_encode(file_get_contents($logoInstansiPath));
@@ -101,7 +88,7 @@ class KeuanganController extends Controller
             'hargaBarangs'      => $hargaBarangs,
             'logoInstansi'      => $logoInstansi,
             'totalHarga'        => Barang::sum('harga'),
-            'totalHargaUsaha'   => Barang::where('user_id', auth()->user()->id)->sum('harga')
+            'totalHargaUsaha'   => Barang::sum('harga')
         ]);
 
         return $pdf->download('laporan-keuangan.pdf');

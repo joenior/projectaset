@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/datauser/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <a class="btn btn-secondary float-end" href="/datauser/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
         <h1 class="h3 mb-4">Tambah User Baru</h1>
        
         <div class="row">
@@ -34,7 +34,6 @@
                                 @enderror
                             </div>
 
-                            
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group">
@@ -42,22 +41,20 @@
                                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                         <i class="bi bi-eye-slash-fill"></i>
                                     </button>
-                                        @error('password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="roles" class="form-label">Jabatan</label>
-                                <select class="form-select @error('roles') is-invalid @enderror" aria-label="Default select example" name="roles" id="roles">
-                                    <option selected>Pilih Jabatan</option>
-                                    <option value="kepalausaha">Kepala Usaha</option>
-                                    <option value="direktur">Direktur</option>
+                                <label for="Roles" class="form-label">Roles</label>
+                                <select class="form-select @error('Roles') is-invalid @enderror" aria-label="Default select example" name="Roles" id="Roles">
+                                    <option value="admin" selected>Admin</option>
                                 </select>
-                                @error('roles')
+                                @error('Roles')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -65,7 +62,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="lokasi" class="form-label" id="lokasiLabel">Lokasi</label>
+                                <label for="lokasi" class="form-label">Lokasi</label>
                                 <select class="form-select" aria-label="Default select example" id="lokasi" name="lokasi_id">
                                     @foreach ($lokasis as $lokasi)
                                         @if (old('lokasi_id') == $lokasi->id)
@@ -97,25 +94,6 @@
         this.querySelector('i').classList.toggle('bi-eye-fill');
         this.querySelector('i').classList.toggle('bi-eye-slash-fill');
     });
-</script>
-
-<script>
-    var lokasiLabel = document.getElementById('lokasiLabel')
-    var roles = document.getElementById('roles');
-    var lokasi_id = document.getElementById('lokasi');
-
-    lokasiLabel.style.display = "none";
-    lokasi_id.style.display = "none";
-
-    roles.addEventListener("change", function(){
-        if(roles.value === "kepalausaha"){
-            lokasiLabel.style.display = "block";
-            lokasi_id.style.display = "block";
-        } else {
-            lokasiLabel.style.display = "none";
-            lokasi_id.style.display = "none";
-        }
-    })
 </script>
 
 @endsection

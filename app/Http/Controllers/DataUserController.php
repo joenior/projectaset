@@ -41,13 +41,13 @@ class DataUserController extends Controller
     {
         $validated = $request->validate([
             'name'      => 'required',
-            'email'     => 'required',
-            'password'  => 'required',
-            'roles'     => 'required',
-            'lokasi_id' => $request->roles == 'kepalausaha' ? 'required' : ''
+            'email'     => 'required|email|unique:users,email',
+            'password'  => 'required|min:6',
+            'lokasi_id' => 'nullable|exists:lokasis,id'
         ]);
 
         $validated['password'] = bcrypt($validated['password']);
+        $validated['roles'] = 'admin'; 
 
         User::create($validated);
         Alert::success('Berhasil', 'Berhasil Menambahkan User Baru');
@@ -81,20 +81,14 @@ class DataUserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|unique:users,email,'.$id,
-            'roles' => 'required|in:sekretaris,direktur,kepalausaha',
-            'lokasi_id' => 'nullable|'.($request->input('roles') == 'kepalausaha' ? 'required' : 'nullable').'|exists:lokasis,id',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'lokasi_id' => 'nullable|exists:lokasis,id',
         ]);
     
         $user = User::findOrFail($id);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
-        $user->roles = $validatedData['roles'];
-    
-        if ($user->roles === 'kepalausaha') {
-            $validatedData['lokasi_id'] = $request->input('lokasi_id');
-            $user->lokasi_id = $validatedData['lokasi_id'];
-        }
+        $user->lokasi_id = $validatedData['lokasi_id'];
     
         $user->save();
     
@@ -102,8 +96,6 @@ class DataUserController extends Controller
         return redirect('/datauser');
     }
     
-    
-
     /**
      * Remove the specified resource from storage.
      */
@@ -115,9 +107,4 @@ class DataUserController extends Controller
         Alert::success('Berhasil', 'Berhasil Menghapus User');
         return redirect('/datauser');
     }
-    
-
-
-    
-
 }

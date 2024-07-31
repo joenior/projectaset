@@ -33,10 +33,7 @@
           			<span class="align-middle">Simaset</span>
         		</a>
 
-				
 				<ul class="sidebar-nav">
-					{{-- Menu untuk roles sekretaris --}}
-					@if($users->roles === 'sekretaris');
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="/home">
 							<i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
@@ -44,7 +41,7 @@
 					</li>
 
 					<li class="sidebar-header">
-						Data User 
+						Data User
 					</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="/datauser/">
@@ -109,7 +106,6 @@
 						</a>
 					</li>
 
-
 					<li class="sidebar-header">
 						Riwayat
 					</li>
@@ -127,179 +123,6 @@
 							<i class="bi bi-unlock"></i> <span class="align-middle">Reset Password</span>
 						</a>
 					</li>
-					@endif
-
-
-					{{-- Menu untuk roles Direktur --}}
-					@if($users->roles === 'direktur');
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/home">
-							<i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Data Master
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/barang/">
-							<i class="bi bi-collection"></i> <span class="align-middle">Data Barang</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/kategori/">
-							<i class="bi bi-tags"></i> <span class="align-middle">Kategori</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/lokasi/">
-							<i class="bi bi-geo-alt"></i> <span class="align-middle">Lokasi</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/satuan/">
-							<i class="bi bi-hdd-stack"></i><span class="align-middle">Satuan</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Pengadaan Barang
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/permintaan/">
-							<i class="bi bi-card-list"></i> <span class="align-middle">Permintaan</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Laporan
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/statistik/">
-							<i class="bi bi-clipboard-data"></i> <span class="align-middle">Statistik</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/keuangan/">
-							<i class="bi bi-currency-dollar"></i> <span class="align-middle">Keuangan</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/laporan/">
-							<i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/label/">
-							<i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Riwayat
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/penghapusan-aset/">
-							<i class="bi bi-clock-history"></i> <span class="align-middle">Penghapusan Aset</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Pengaturan
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/reset-password/">
-							<i class="bi bi-unlock"></i> <span class="align-middle">Reset Password</span>
-						</a>
-					</li>
-	
-					@endif
-
-
-					{{-- Menu untuk roles Kepala Unit Usaha --}}
-					@if($users->roles === 'kepalausaha');
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/home">
-							<i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Data Master
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/barang/">
-							<i class="bi bi-collection"></i> <span class="align-middle">Data Barang</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/kategori/">
-							<i class="bi bi-tags"></i> <span class="align-middle">Kategori</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/lokasi/">
-							<i class="bi bi-geo-alt"></i> <span class="align-middle">Lokasi</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/satuan/">
-							<i class="bi bi-hdd-stack"></i><span class="align-middle">Satuan</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Pengadaan Barang
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/pengadaan/">
-							<i class="bi bi-hand-index"></i> <span class="align-middle">Pengajuan</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Laporan
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/statistik/">
-							<i class="bi bi-clipboard-data"></i> <span class="align-middle">Statistik</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/keuangan/">
-							<i class="bi bi-currency-dollar"></i> <span class="align-middle">Keuangan</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/laporan/">
-							<i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
-						</a>
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/label/">
-							<i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Riwayat
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/penghapusan-aset/">
-							<i class="bi bi-clock-history"></i> <span class="align-middle">Penghapusan Aset</span>
-						</a>
-					</li>
-
-					<li class="sidebar-header">
-						Pengaturan
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/reset-password/">
-							<i class="bi bi-unlock"></i> <span class="align-middle">Reset Password</span>
-						</a>
-					</li>
-
-					@endif
 				</ul>
 			</div>
 		</nav>
@@ -312,14 +135,9 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						
 						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-								<i class="align-middle" data-feather="settings"></i>
-							</a>
-
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<img src="/asset/img/avatars/avatar.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ auth()->user()->roles }}</span>
+								<img src="/asset/img/avatars/avatar.png" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ auth()->user()->Roles }}</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="/reset-password/"><i class="align-middle me-1" data-feather="settings"></i> Password</a>
@@ -390,16 +208,13 @@
 		</div>
 	</div>
 
-	
 	<script src="/asset/js/app.js"></script>
 
 	@include('sweetalert::alert')
-	{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script> --}}
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script type="text/javascript" src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
-	{{-- Ck Editor --}}
 	<script>
 		ClassicEditor
 			.create( document.querySelector( '#text' ) )
@@ -408,7 +223,6 @@
 			} );
 	</script>
 
-	{{-- Pop Up Sweet Alert Konfirmasi Penghaousan--}}
 	<script>
 		$(".swal-confirm").click(function(e) {
 			e.preventDefault();
@@ -430,7 +244,6 @@
 		});
 	</script>
 
-	{{-- Pop Up Sweet Alert Konfirmasi Persetujuan Pengadaan Barang--}}
 	<script>
 		$(".pengajuan-confirm").click(function(e) {
 			e.preventDefault();
@@ -452,7 +265,6 @@
 		});
 	</script>
 
-	{{-- Pop Up Sweet Alert Konfirmasi Penolakan  Pengadaan Barang--}}
 	<script>
 		$(".tolak-confirm").click(function(e) {
 			e.preventDefault();
@@ -475,41 +287,28 @@
 	</script>
 
 	<script>
-	// Dapatkan semua menu navigasi
-	var navItems = document.querySelectorAll('.sidebar-item');
-
-	// Loop melalui setiap menu navigasi
-	for (var i = 0; i < navItems.length; i++) {
-	// Tambahkan event listener untuk setiap menu navigasi
-	navItems[i].addEventListener('click', function() {
-		// Hapus kelas 'active' dari semua menu navigasi
-		for (var j = 0; j < navItems.length; j++) {
-		navItems[j].classList.remove('active');
+		var navItems = document.querySelectorAll('.sidebar-item');
+		for (var i = 0; i < navItems.length; i++) {
+			navItems[i].addEventListener('click', function() {
+				for (var j = 0; j < navItems.length; j++) {
+					navItems[j].classList.remove('active');
+				}
+				this.classList.add('active');
+				localStorage.setItem('selectedNav', this.querySelector('a').getAttribute('href'));
+			});
 		}
-		// Tambahkan kelas 'active' pada menu navigasi yang dipilih
-		this.classList.add('active');
-
-		// Simpan informasi tentang menu navigasi yang dipilih dalam local storage
-		localStorage.setItem('selectedNav', this.querySelector('a').getAttribute('href'));
-	});
-	}
-
-	// Ambil informasi tentang menu navigasi yang dipilih dari local storage saat halaman dimuat
-	var selectedNav = localStorage.getItem('selectedNav');
-
-	// Jika ada informasi tentang menu navigasi yang dipilih, atur kembali class 'active' pada menu navigasi yang sesuai
-	if (selectedNav) {
-	for (var i = 0; i < navItems.length; i++) {
-		var navLink = navItems[i].querySelector('a');
-		if (navLink.getAttribute('href') === selectedNav) {
-		navItems[i].classList.add('active');
-		break;
+		var selectedNav = localStorage.getItem('selectedNav');
+		if (selectedNav) {
+			for (var i = 0; i < navItems.length; i++) {
+				var navLink = navItems[i].querySelector('a');
+				if (navLink.getAttribute('href') === selectedNav) {
+					navItems[i].classList.add('active');
+					break;
+				}
+			}
 		}
-	}
-	}
 	</script>
 
-	
 </body>
 
 </html>

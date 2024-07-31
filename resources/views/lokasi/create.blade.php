@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/lokasi/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <a class="btn btn-secondary float-end" href="/lokasi/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
         <h1 class="h3 mb-4">Tambah Lokasi Baru</h1>
        
         <div class="row">

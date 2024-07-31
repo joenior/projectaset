@@ -60,27 +60,11 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index']);
 Route::put('/reset-password', [ResetPasswordController::class, 'resetPassword']);
 Route::get('barang/label/{id}', [BarangController::class, 'cetakLabel']);
 
-Route::middleware(['auth', 'checkRole:direktur,sekretaris'])->group(function(){
+Route::middleware(['auth', 'checkRole:admin'])->group(function(){
     Route::resource('/permintaan', StatusPengadaanController::class);
-});
-
-Route::group(['middleware' => ['auth', 'direktur']], function(){
-    Route::put('/permintaan/{id}/setuju', [StatusPengadaanController::class, 'setPersetujuan'])->name('permintaan.setuju');
-    Route::put('/permintaan/{id}/tolak', [StatusPengadaanController::class, 'setPenolakan'])->name('permintaan.tolak');
-});
-
-Route::group(['middleware' => ['auth', 'sekretaris']], function(){
     Route::resource('/datauser', DataUserController::class);
-    Route::get('permintaan/laporan-pengadaan/{id}', [StatusPengadaanController::class, 'cetakPengadaanBarang']);
-});
-
-Route::group(['middleware' => ['auth', 'kepalausaha']], function(){
     Route::resource('/pengadaan', PengadaanController::class);
 });
-
-
-
-
 
 
 

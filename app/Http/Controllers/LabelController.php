@@ -12,13 +12,7 @@ class LabelController extends Controller
 {
     public function index()
     {
-        $userLogin = auth()->user()->roles;
-
-        if($userLogin == 'kepalausaha'){
-            $barangs = Barang::where('user_id', auth()->user()->id)->get();
-        } else {
-            $barangs = Barang::all();
-        }
+        $barangs = Barang::all();
 
         return view('/label.index', [
             'users'     => Auth::user(),

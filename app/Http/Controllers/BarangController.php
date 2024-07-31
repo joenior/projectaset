@@ -6,7 +6,7 @@ use App\Models\Barang;
 use App\Models\Lokasi;
 use App\Models\Satuan;
 use App\Models\Kategori;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Endroid\QrCode\QrCode;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -25,13 +25,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $userLogin = auth()->user()->roles;
-
-        if($userLogin == 'kepalausaha'){
-            $barangs = Barang::where('user_id', auth()->user()->id)->get();
-        } else {
-            $barangs = Barang::all();
-        }
+        $barangs = Barang::all();
         
         return view('barang.index', [
             'users'   => Auth::user(),
@@ -76,9 +70,6 @@ class BarangController extends Controller
               
         // Generate unique code
         $validated['kode_barang'] = 'MS-' . uniqid();
-        // $lastCode = Barang::max('kode_barang');
-        // $codeNumber = intval(substr($lastCode, 3)) + 1;
-        // $validated['kode_barang'] = 'MS' . str_pad($codeNumber, 5, '0', STR_PAD_LEFT);
 
         $qrCode = new QrCode($validated['kode_barang']);
         $writer = new PngWriter();
@@ -162,7 +153,8 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        $barang->delete($barang->id);
+        $barang->delete();
+
         Alert::success('Berhasil', 'Berhasil Menghapus Barang');
         return redirect('/barang');
     }
@@ -177,7 +169,7 @@ class BarangController extends Controller
         $qrCode = base64_encode(file_get_contents($qrCodePath));
         $logoInstansi = base64_encode(file_get_contents($logoInstansiPath));
 
-        $pdf = PDF::loadView('barang.label', [
+        $pdf = Pdf::loadView('barang.label', [ // Gunakan alias yang benar
             'users'         => Auth::user(),
             'barang'        => $barang,
             'qrCode'        => $qrCode,

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/datauser/create" role="button"><i class="bi bi-person-add"></i> Tambah User</a>
+    <a class="btn btn-primary float-end" href="/datauser/create" Roles="button"><i class="bi bi-person-add"></i> Tambah User</a>
     <h1 class="h3 mb-4">Data User</h1>
    
 
@@ -16,7 +16,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Jabatan</th>
+                                    <th>Roles</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
@@ -26,7 +26,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->roles }}</td>
+                                        <td>{{ $user->Roles }}</td>
                                         <td>
                                             <a href="/datauser/{{ $user->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
                                             <form id="{{ $user->id }}" action="/datauser/{{ $user->id }}" method="POST" class="d-inline">

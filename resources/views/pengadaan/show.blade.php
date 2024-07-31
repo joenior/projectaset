@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/pengadaan/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <a class="btn btn-secondary float-end" href="/pengadaan/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
         <h1 class="h3 mb-4">Detail Pengajuan</h1>
        
         <div class="row">

@@ -347,7 +347,7 @@ select {
   text-transform: none;
 }
 
-[role=button] {
+[Roles=button] {
   cursor: pointer;
 }
 

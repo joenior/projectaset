@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/kategori/create" role="button"><i class="bi bi-tags"></i> Tambah Kategori</a>
+    <a class="btn btn-primary float-end" href="/kategori/create" Roles="button"><i class="bi bi-tags"></i> Tambah Kategori</a>
     <h1 class="h3 mb-4">Data Kategori</h1>
    
 

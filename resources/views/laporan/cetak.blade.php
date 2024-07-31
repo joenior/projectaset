@@ -45,24 +45,20 @@
 			<img src="data:image/png;base64,{{ $logoInstansi }}" alt="Logo Instansi" style="width:100px" height="100px">
 		</div>
 		<div class="header">
-			<h1>Badan usaha Milik Desa Mitra Sehati</h1>
-			<p>Karangmulyo, RT.01, RW.02. Kec. Purwodadi, Kab. Purworejo</p>
+			<h1>Replace meeeee</h1>
+			<p>And meeee</p>
 		</div>
 
 		<h3 style="text-align: center">
-			@if(auth()->user()->roles === 'kepalausaha')
-				<h3 class="h3 mb-4">Laporan Data Aset {{ auth()->user()->lokasi->nama_lokasi }}</h3>
-			@else
-				<h3 class="h3 mb-4">Laporan Data Aset </h3>
-			@endif
+			<h3 class="h3 mb-4">Laporan Data Aset</h3>
 		</h3>
 		<table class="table">
 			<thead>
 				<tr>
 					<th>No</th>
 					<th>Kode Barang</th>
-					<th>Nama Barang</th>
-                    <th>Tanggal Pembelian</th>
+					 <th>Nama Barang</th>
+					<th>Tanggal Pembelian</th>
 					<th>Kategori</th>
 					<th>Lokasi</th>
 				</tr>

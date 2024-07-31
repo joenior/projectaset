@@ -35,10 +35,8 @@
                                         <td>
                                             <a href="/permintaan/{{ $permintaan->id }}" class="btn btn-secondary d-inline mb-2"><i class="bi bi-eye-fill"></i></a>
                                         </td>
-
-                                        @if (auth()->user()->roles === 'direktur')
-                                            <td>
-                                                @if ($permintaan->status == 'pending')
+                                        <td>
+                                            @if ($permintaan->status == 'pending')
                                                 <form id="form-{{ $permintaan->id }}"  action="/permintaan/{{ $permintaan->id }}/setuju" method="POST" class="d-inline">
                                                     @method('PUT')
                                                     @csrf
@@ -49,16 +47,11 @@
                                                     @csrf
                                                     <div class="btn btn-danger mb-2 tolak-confirm" data-form="form-{{ $permintaan->id }}-tolak"><i class="bi bi-x-square"></i></div>
                                                 </form>
-                                                @else
-                                                    <a href="/permintaan/{{ $permintaan->id }}/edit" class="btn btn-primary d-inline mb-2"><i class="bi bi-plus-square-fill"></i> Kirim Catatan</a>
-                                                @endif
-                                            </td>
-                                        @else
-                                           <td>
-                                                <a class="btn btn-primary" href="/permintaan/laporan-pengadaan/{{ $permintaan->id }}" target="_blank" role="button"><i class="bi bi-printer"></i>&nbsp; Cetak</a>                    
-                                           </td>
-                                        @endif
-                                        
+                                            @else
+                                                <a href="/permintaan/{{ $permintaan->id }}/edit" class="btn btn-primary d-inline mb-2"><i class="bi bi-plus-square-fill"></i> Kirim Catatan</a>
+                                            @endif
+                                            <a class="btn btn-primary" href="/permintaan/laporan-pengadaan/{{ $permintaan->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak</a>                    
+                                        </td>
                                     </tr>  
                                 @endforeach                     
                             </tbody>
@@ -69,15 +62,13 @@
         </div>
     </div>
 
-    {{-- @include('permintaan/edit') --}}
-
     <script>
         $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
+            $('#table_id').DataTable();
+        });
     </script>
 
-    {{-- <script>
+    <script>
         $(document).ready(function(){
             $('.pengajuan-confirm, .tolak-confirm').click(function(event){
                 event.preventDefault();
@@ -85,14 +76,5 @@
                 document.getElementById(formId).submit();
             });
         });
-    </script> --}}
-
-    
-
-
+    </script>
 @endsection
-
-
-
-
-

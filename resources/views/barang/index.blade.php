@@ -1,13 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/barang/create" role="button"><i class="bi bi-collection"></i> Tambah Barang</a>
+    <a class="btn btn-primary float-end" href="/barang/create" Roles="button"><i class="bi bi-collection"></i> Tambah Barang</a>
 
-    @if(auth()->user()->roles === 'kepalausaha')
-        <h1 class="h3 mb-4">Data Barang {{ auth()->user()->lokasi->nama_lokasi }}</h1>
-    @else
-        <h1 class="h3 mb-4">Data Barang {{ auth()->user()->roles}}</h1>
-    @endif
+    <h1 class="h3 mb-4">Data Barang</h1>
     
     <div class="row">
         <div class="col">

@@ -31,15 +31,12 @@ class HomeController extends Controller
     {
         $userLogin = auth()->user()->roles;
 
-        if($userLogin == 'kepalausaha'){
+        if($userLogin == 'admin'){
             $barang = Barang::selectRaw('YEAR(tanggal) as tahun, COUNT(*) as total')
-                        ->where('user_id', auth()->user()->id)
                         ->groupBy('tahun')
                         ->get();
         } else {
-            $barang = Barang::selectRaw('YEAR(tanggal) as tahun, COUNT(*) as total')
-                        ->groupBy('tahun')
-                        ->get();
+            $barang = collect(); // Inisialisasi $barang sebagai koleksi kosong jika bukan admin
         }
 
         $chart = new \stdClass();
@@ -52,7 +49,7 @@ class HomeController extends Controller
         $countKategori  = Kategori::all()->count();
         $countUsers     = User::all()->count();
         return view('/home', [
-            'users'     => Auth::user(),
+            'users'         => Auth::user(),
             'chart'         => $chart,
             'countBarang'   => $countBarang,
             'countLokasi'   => $countLokasi,

@@ -18,7 +18,7 @@
                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" autofocus/>
               
                   @error('email')
-                      <span class="invalid-feedback" role="alert">
+                      <span class="invalid-feedback" Roles="alert">
                           <p>{{ $message }}</p>
                       </span>
                   @enderror
@@ -32,7 +32,7 @@
                   <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" aria-describedby="password"/>
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback" Roles="alert">
                             <p>{{ $message }}</p>
                         </span>
                     @enderror

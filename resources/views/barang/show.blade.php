@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/barang/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <a class="btn btn-secondary float-end" href="/barang/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
         <h1 class="h3 mb-4">Detail Barang</h1>
        
         <div class="row">
@@ -62,7 +62,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" role="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
+                        <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
                     </div>
                 </div>
             </div>
