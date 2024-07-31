@@ -60,7 +60,7 @@ Route::get('/reset-password', [ResetPasswordController::class, 'index']);
 Route::put('/reset-password', [ResetPasswordController::class, 'resetPassword']);
 Route::get('barang/label/{id}', [BarangController::class, 'cetakLabel']);
 
-Route::middleware(['auth', 'checkRole:admin'])->group(function(){
+Route::middleware(['auth'])->group(function(){
     Route::resource('/permintaan', StatusPengadaanController::class);
     Route::resource('/datauser', DataUserController::class);
     Route::resource('/pengadaan', PengadaanController::class);
