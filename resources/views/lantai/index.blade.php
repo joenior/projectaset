@@ -1,10 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/lokasi/create" Roles="button"><i class="bi bi-geo-alt"></i> Tambah Lokasi</a>
-    <h1 class="h3 mb-4">Data Lokasi</h1>
-   
-
+    <a class="btn btn-primary float-end" href="/lantai/create" role="button"><i class="bi bi-plus-circle"></i> Tambah Lantai</a>
+    <h1 class="h3 mb-4">Data Lantai</h1>
+    
     <div class="row">
         <div class="col">
             <div class="card">
@@ -14,23 +13,25 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lokasi</th>
+                                    <th>Nama Lantai</th>
                                     <th>Deskripsi</th>
+                                    <th>Gedung</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($lokasis as $lokasi)
+                                @foreach ($lantais as $lantai)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $lokasi->nama_lokasi }}</td>
-                                        <td>{!! $lokasi->deskripsi !!}</td>
-                                        <td>  
-                                            <a href="/lokasi/{{ $lokasi->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
-                                            <form id="{{ $lokasi->id }}" action="/lokasi/{{ $lokasi->id }}" method="POST" class="d-inline">
+                                        <td>{{ $lantai->nama_lantai }}</td>
+                                        <td>{{ $lantai->deskripsi }}</td>
+                                        <td>{{ $lantai->gedung->nama_gedung }}</td>
+                                        <td>
+                                            <a href="/lantai/{{ $lantai->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
+                                            <form action="/lantai/{{ $lantai->id }}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $lokasi->id }}"><i class="bi bi-trash-fill"></i></div>
+                                                <button class="btn btn-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus lantai ini?')"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
                                     </tr>  
@@ -44,9 +45,8 @@
     </div>
 
     <script>
-        $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
     </script>
-
 @endsection

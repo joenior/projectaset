@@ -40,18 +40,31 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="lokasi" class="form-label">Lokasi</label>
-                                <select class="form-select" aria-label="Default select example" id="lokasi" name="lokasi_id">
-                                    @foreach ($lokasis as $lokasi)
-                                        @if (old('lokasi_id') == $lokasi->id)
-                                            <option value="{{ $lokasi->id }}" selected>{{ $lokasi->nama_lokasi }}</option>
-                                        @else
-                                            <option value="{{ $lokasi->id }}">{{ $lokasi->nama_lokasi }}</option>
-                                        @endif
+                                <label for="gedung" class="form-label">Gedung</label>
+                                <select class="form-select" aria-label="Default select example" id="gedung" name="gedung_id">
+                                    @foreach ($gedungs as $gedung)
+                                        <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="lantai" class="form-label">Lantai</label>
+                                <select class="form-select" aria-label="Default select example" id="lantai" name="lantai_id">
+                                    @foreach ($lantais as $lantai)
+                                        <option value="{{ $lantai->id }}">{{ $lantai->nama_lantai }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ruangan" class="form-label">Ruangan</label>
+                                <select class="form-select" aria-label="Default select example" id="ruangan" name="ruangan_id">
+                                    @foreach ($ruangans as $ruangan)
+                                        <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi</label>

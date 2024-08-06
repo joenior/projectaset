@@ -14,6 +14,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>ID Pengadaan</th>
                                     <th>Pengajuan</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
@@ -22,8 +23,9 @@
                             <tbody>
                                 @foreach ($pengadaans as $pengadaan)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>                      
-                                        <td>{{ $pengadaan->nama_pengadaan }}</td>   
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $pengadaan->id_pengadaans }}</td>
+                                        <td>{{ $pengadaan->nama_pengadaan }}</td>
                                         <td>
                                             @if ($pengadaan->status == 'pending')
                                                 <span class="badge bg-warning text-dark">{{ $pengadaan->status }}</span>

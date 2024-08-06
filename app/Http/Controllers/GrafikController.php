@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use stdClass;
 use App\Models\User;
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
 use App\Models\Kategori;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -26,7 +28,9 @@ class GrafikController extends Controller
         $chart->data    = $barang->pluck('total');
 
         $countBarang    = Barang::all()->count();
-        $countLokasi    = Lokasi::all()->count();
+        $countGedung    = Gedung::all()->count();
+        $countLantai    = Lantai::all()->count();
+        $countRuangan   = Ruangan::all()->count();
         $countKategori  = Kategori::all()->count();
         $countUsers     = User::all()->count();
 
@@ -34,7 +38,9 @@ class GrafikController extends Controller
             'users'         => Auth::user(),
             'chart'         => $chart,
             'countBarang'   => $countBarang,
-            'countLokasi'   => $countLokasi,
+            'countGedung'   => $countGedung,
+            'countLantai'   => $countLantai,
+            'countRuangan'  => $countRuangan,
             'countKategori' => $countKategori,
             'countUsers'    => $countUsers,
         ]);

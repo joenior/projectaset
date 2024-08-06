@@ -11,16 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengadaans', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_pengadaan');
-            $table->text('deskripsi');
-            $table->integer('quantity');
-            $table->date('tanggal_pengajuan');
-            $table->foreignId('user_id');
-            $table->foreignId('lokasi_id')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('pengadaans')) {
+            Schema::create('pengadaans', function (Blueprint $table) {
+                $table->id();
+                $table->string('id_pengadaans')->unique();
+                $table->string('nama_pengadaan');
+                $table->text('deskripsi');
+                $table->integer('quantity');
+                $table->timestamp('tanggal_pengajuan');
+                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+                $table->foreignId('gedung_id')->constrained()->onDelete('cascade');
+                $table->foreignId('lantai_id')->constrained()->onDelete('cascade');
+                $table->foreignId('ruangan_id')->constrained()->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

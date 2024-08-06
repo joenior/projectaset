@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/kategori/create" Roles="button"><i class="bi bi-tags"></i> Tambah Kategori</a>
-    <h1 class="h3 mb-4">Data Kategori</h1>
-   
+    <a class="btn btn-primary float-end" href="/ruangan/create" role="button"><i class="bi bi-plus-circle"></i> Tambah Ruangan</a>
+    <h1 class="h3 mb-4">Data Ruangan</h1>
+    
     <div class="row">
         <div class="col">
             <div class="card">
@@ -13,25 +13,25 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID Kategori</th>
-                                    <th>Nama Kategori</th>
+                                    <th>Nama Ruangan</th>
                                     <th>Deskripsi</th>
+                                    <th>Lantai</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kategories as $kategori)
+                                @foreach ($ruangans as $ruangan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kategori->id_kategoris }}</td>
-                                        <td>{{ $kategori->nama }}</td>
-                                        <td>{!! $kategori->deskripsi !!}</td>
-                                        <td>  
-                                            <a href="/kategori/{{ $kategori->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
-                                            <form id="{{ $kategori->id }}" action="/kategori/{{ $kategori->id }}" method="POST" class="d-inline">
+                                        <td>{{ $ruangan->nama_ruangan }}</td>
+                                        <td>{{ $ruangan->deskripsi }}</td>
+                                        <td>{{ $ruangan->lantai->nama_lantai }}</td>
+                                        <td>
+                                            <a href="/ruangan/{{ $ruangan->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
+                                            <form action="/ruangan/{{ $ruangan->id }}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $kategori->id }}"><i class="bi bi-trash-fill"></i></div>
+                                                <button class="btn btn-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus ruangan ini?')"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
                                     </tr>  
@@ -45,9 +45,8 @@
     </div>
 
     <script>
-        $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
     </script>
-
 @endsection

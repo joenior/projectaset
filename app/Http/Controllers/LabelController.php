@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,9 @@ class LabelController extends Controller
 
         return view('/label.index', [
             'users'     => Auth::user(),
-            'lokasis'   => Lokasi::all(),
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all(),
             'barangs'   => $barangs
         ]);
     }

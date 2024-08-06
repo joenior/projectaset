@@ -21,8 +21,11 @@ return new class extends Migration
             $table->date('tanggal');
             $table->foreignId('user_id');
             $table->foreignId('kategori_id')->nullable();
-            $table->foreignId('lokasi_id')->nullable();
             $table->foreignId('satuan_id')->nullable();
+            $table->foreignId('pengadaan_id')->nullable();
+            $table->foreignId('gedung_id')->nullable();
+            $table->foreignId('lantai_id')->nullable();
+            $table->foreignId('ruangan_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

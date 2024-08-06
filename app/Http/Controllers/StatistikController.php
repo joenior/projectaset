@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,15 +34,32 @@ class StatistikController extends Controller
         $pieChart->labels   = $kategori->pluck('nama');
         $pieChart->data     = $kategori->pluck('total');
 
-        // Pie Statistik lokasi
-        $lokasi = DB::table('lokasis')
-                    ->select('nama_lokasi', DB::raw('(SELECT COUNT(*) FROM barangs WHERE lokasi_id = lokasis.id) as total'))
+        // Pie Statistik Gedung
+        $gedung = Gedung::select('nama_gedung', DB::raw('(SELECT COUNT(*) FROM barangs WHERE gedung_id = gedungs.id) as total'))
                     ->get();
 
-        $lokasiChart = new \stdClass();
-        $lokasiChart->type      = 'pie';
-        $lokasiChart->labels    = $lokasi->pluck('nama_lokasi');
-        $lokasiChart->data      = $lokasi->pluck('total');
+        $gedungChart = new \stdClass();
+        $gedungChart->type      = 'pie';
+        $gedungChart->labels    = $gedung->pluck('nama_gedung');
+        $gedungChart->data      = $gedung->pluck('total');
+
+        // Pie Statistik Lantai
+        $lantai = Lantai::select('nama_lantai', DB::raw('(SELECT COUNT(*) FROM barangs WHERE lantai_id = lantais.id) as total'))
+                    ->get();
+
+        $lantaiChart = new \stdClass();
+        $lantaiChart->type      = 'pie';
+        $lantaiChart->labels    = $lantai->pluck('nama_lantai');
+        $lantaiChart->data      = $lantai->pluck('total');
+
+        // Pie Statistik Ruangan
+        $ruangan = Ruangan::select('nama_ruangan', DB::raw('(SELECT COUNT(*) FROM barangs WHERE ruangan_id = ruangans.id) as total'))
+                    ->get();
+
+        $ruanganChart = new \stdClass();
+        $ruanganChart->type      = 'pie';
+        $ruanganChart->labels    = $ruangan->pluck('nama_ruangan');
+        $ruanganChart->data      = $ruangan->pluck('total');
 
         // Total Harga Statistik
         $totalHarga = DB::table('barangs')
@@ -57,8 +76,9 @@ class StatistikController extends Controller
             'chart'         => $chart,
             'pieChart'      => $pieChart,
             'kategori'      => $kategori,
-            'lokasiChart'   => $lokasiChart,
-            'lokasi'        => $lokasi,
+            'gedungChart'   => $gedungChart,
+            'lantaiChart'   => $lantaiChart,
+            'ruanganChart'  => $ruanganChart,
             'keuanganChart' => $keuanganChart,
         ]);
     }

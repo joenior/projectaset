@@ -46,7 +46,9 @@ class PengadaanController extends Controller
     {
         return view('pengadaan.create', [
             'users'   => Auth::user(),
-            'lokasis' => Lokasi::all()
+            'gedungs' => Gedung::all(),
+            'lantais' => Lantai::all(),
+            'ruangans' => Ruangan::all()
         ]);
     }
 
@@ -59,7 +61,9 @@ class PengadaanController extends Controller
             'nama_pengadaan'    => 'required',
             'quantity'          => 'required|numeric',
             'deskripsi'         => 'required',
-            'lokasi_id'         => 'required',  
+            'gedung_id'         => 'required',
+            'lantai_id'         => 'required',
+            'ruangan_id'        => 'required',
         ]);
 
         $validated['user_id'] = auth()->user()->id;
@@ -97,7 +101,9 @@ class PengadaanController extends Controller
         return view('pengadaan.edit', [
             'users'     => Auth::user(),
             'pengadaan' => $pengadaan,
-            'lokasis'   => Lokasi::all(),
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all(),
         ]);
     }
 
@@ -110,23 +116,16 @@ class PengadaanController extends Controller
             'nama_pengadaan'    => 'required',
             'quantity'          => 'required|numeric',
             'deskripsi'         => 'required',
-            'lokasi_id'         => 'required',
-            // 'tanggal_pengajuan' => 'required',
+            'gedung_id'         => 'required',
+            'lantai_id'         => 'required',
+            'ruangan_id'        => 'required',
         ];
-
-        // jika tanggal_pengajuan tidak diubah, gunakan nilai yang ada pada pengadaan saat ini
-        if ($request->tanggal_pengajuan == $pengadaan->tanggal_pengajuan) {
-            $validated['tanggal_pengajuan'] = $pengadaan->tanggal_pengajuan;
-        }
 
         $validated = $request->validate($rules);
         $validated['user_id'] = auth()->user()->id;
 
-    
-
         $pengadaan->update($validated);
 
-        
         Alert::success('Berhasil !', 'Berhasil Mengedit Pengajuan');
         return redirect('/pengadaan');   
     }

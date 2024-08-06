@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use App\Models\Satuan;
 use App\Models\Kategori;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -41,7 +43,9 @@ class BarangController extends Controller
         return view('barang.create', [
             'users'     => Auth::user(),
             'kategoris' => Kategori::all(),
-            'lokasis'   => Lokasi::all(),
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all(),
             'satuans'   => Satuan::all(),
         ]); 
     }
@@ -57,7 +61,9 @@ class BarangController extends Controller
             'gambar'        => 'required|mimes:jpeg,png,jpg',
             'harga'         => 'required|numeric',
             'kategori_id'   => 'required',
-            'lokasi_id'     => 'required',
+            'gedung_id'     => 'required',
+            'lantai_id'     => 'required',
+            'ruangan_id'    => 'required',
             'satuan_id'     => 'required'
         ]);
 
@@ -107,7 +113,9 @@ class BarangController extends Controller
             'users'     => Auth::user(),
             'barang'    => $barang,
             'kategoris' => Kategori::all(),
-            'lokasis'   => Lokasi::all(),
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all(),
             'satuans'   => Satuan::all(),
         ]);
     }
@@ -123,7 +131,9 @@ class BarangController extends Controller
             'gambar'        => 'image|file',
             'harga'         => 'required|numeric',
             'kategori_id'   => 'required',
-            'lokasi_id'     => 'required',
+            'gedung_id'     => 'required',
+            'lantai_id'     => 'required',
+            'ruangan_id'    => 'required',
             'satuan_id'     => 'required'
         ];
 

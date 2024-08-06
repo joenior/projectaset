@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Dompdf\Dompdf;
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +24,9 @@ class KeuanganController extends Controller
         return view('keuangan.index', [
             'users'             => Auth::user(),
             'hargaBarangs'      => $hargaBarangs,
-            'lokasis'           => Lokasi::all(),
+            'gedungs'           => Gedung::all(),
+            'lantais'           => Lantai::all(),
+            'ruangans'          => Ruangan::all(),
             'totalHarga'        => Barang::sum('harga'),
             'totalHargaUsaha'   => Barang::sum('harga')
         ]);

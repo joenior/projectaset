@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,9 @@ class DataUserController extends Controller
         return view('datauser.index', [
             'users'     => Auth::user(),
             'datauser'  => User::all(),
-            'lokasis'   => Lokasi::all()
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all()
         ]);
     }
 
@@ -30,7 +34,9 @@ class DataUserController extends Controller
     {
         return view('datauser.create', [
              'users'     => Auth::user(),
-             'lokasis'   => Lokasi::all()
+             'gedungs'   => Gedung::all(),
+             'lantais'   => Lantai::all(),
+             'ruangans'  => Ruangan::all()
         ]);
     }
 
@@ -39,27 +45,20 @@ class DataUserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name'      => 'required',
-            'email'     => 'required|email|unique:users,email',
-            'password'  => 'required|min:6',
-            'lokasi_id' => 'nullable|exists:lokasis,id'
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+            'gedung_id' => 'nullable|exists:gedungs,id',
+            'lantai_id' => 'nullable|exists:lantais,id',
+            'ruangan_id' => 'nullable|exists:ruangans,id',
         ]);
 
-        $validated['password'] = bcrypt($validated['password']);
-        $validated['roles'] = 'admin'; 
+        $validatedData['password'] = bcrypt('password');
 
-        User::create($validated);
-        Alert::success('Berhasil', 'Berhasil Menambahkan User Baru');
+        User::create($validatedData);
+
+        Alert::success('Berhasil', 'Berhasil Menambahkan Data User');
         return redirect('/datauser');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        // 
     }
 
     /**
@@ -70,7 +69,9 @@ class DataUserController extends Controller
         return view('datauser.edit', [
             'users'     => Auth::user(),
             'user'      => User::findOrFail($id),
-            'lokasis'   => Lokasi::all()
+            'gedungs'   => Gedung::all(),
+            'lantais'   => Lantai::all(),
+            'ruangans'  => Ruangan::all()
         ]);
     }
 
@@ -82,13 +83,17 @@ class DataUserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-            'lokasi_id' => 'nullable|exists:lokasis,id',
+            'gedung_id' => 'nullable|exists:gedungs,id',
+            'lantai_id' => 'nullable|exists:lantais,id',
+            'ruangan_id' => 'nullable|exists:ruangans,id',
         ]);
     
         $user = User::findOrFail($id);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
-        $user->lokasi_id = $validatedData['lokasi_id'];
+        $user->gedung_id = $validatedData['gedung_id'];
+        $user->lantai_id = $validatedData['lantai_id'];
+        $user->ruangan_id = $validatedData['ruangan_id'];
     
         $user->save();
     

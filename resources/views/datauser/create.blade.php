@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a class="btn btn-secondary float-end" href="/datauser/" Roles="button"><i class="bi bi-arrow-left"></i> Kembali</a>
+        <a class="btn btn-secondary float-end" href="/datauser/" role="button"><i class="bi bi-arrow-left"></i> Kembali</a>
         <h1 class="h3 mb-4">Tambah User Baru</h1>
        
         <div class="row">
@@ -62,13 +62,39 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="lokasi" class="form-label">Lokasi</label>
-                                <select class="form-select" aria-label="Default select example" id="lokasi" name="lokasi_id">
-                                    @foreach ($lokasis as $lokasi)
-                                        @if (old('lokasi_id') == $lokasi->id)
-                                            <option value="{{ $lokasi->id }}" selected>{{ $lokasi->nama_lokasi }}</option>
+                                <label for="gedung" class="form-label">Gedung</label>
+                                <select class="form-select" aria-label="Default select example" id="gedung" name="gedung_id">
+                                    @foreach ($gedungs as $gedung)
+                                        @if (old('gedung_id') == $gedung->id)
+                                            <option value="{{ $gedung->id }}" selected>{{ $gedung->nama_gedung }}</option>
                                         @else
-                                            <option value="{{ $lokasi->id }}">{{ $lokasi->nama_lokasi }}</option>
+                                            <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="lantai" class="form-label">Lantai</label>
+                                <select class="form-select" aria-label="Default select example" id="lantai" name="lantai_id">
+                                    @foreach ($lantais as $lantai)
+                                        @if (old('lantai_id') == $lantai->id)
+                                            <option value="{{ $lantai->id }}" selected>{{ $lantai->nama_lantai }}</option>
+                                        @else
+                                            <option value="{{ $lantai->id }}">{{ $lantai->nama_lantai }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ruangan" class="form-label">Ruangan</label>
+                                <select class="form-select" aria-label="Default select example" id="ruangan" name="ruangan_id">
+                                    @foreach ($ruangans as $ruangan)
+                                        @if (old('ruangan_id') == $ruangan->id)
+                                            <option value="{{ $ruangan->id }}" selected>{{ $ruangan->nama_ruangan }}</option>
+                                        @else
+                                            <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
                                         @endif
                                     @endforeach
                                 </select>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Barang;
-use App\Models\Lokasi;
+use App\Models\Gedung;
+use App\Models\Lantai;
 use App\Models\Kategori;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -45,14 +47,18 @@ class HomeController extends Controller
         $chart->data    = $barang->pluck('total');
 
         $countBarang    = Barang::all()->count();
-        $countLokasi    = Lokasi::all()->count();
+        $countGedung    = Gedung::all()->count();
+        $countLantai    = Lantai::all()->count();
+        $countRuangan   = Ruangan::all()->count();
         $countKategori  = Kategori::all()->count();
         $countUsers     = User::all()->count();
         return view('/home', [
             'users'         => Auth::user(),
             'chart'         => $chart,
             'countBarang'   => $countBarang,
-            'countLokasi'   => $countLokasi,
+            'countGedung'   => $countGedung,
+            'countLantai'   => $countLantai,
+            'countRuangan'  => $countRuangan,
             'countKategori' => $countKategori,
             'countUsers'    => $countUsers,
         ]);
