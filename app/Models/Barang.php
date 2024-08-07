@@ -9,6 +9,8 @@ use App\Models\Pengadaan;
 use App\Models\Gedung;
 use App\Models\Lantai;
 use App\Models\Ruangan;
+use App\Models\Subkategori;
+use App\Models\Subdivisi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,23 +21,23 @@ class Barang extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['kode_barang', 'gambar', 'nama', 'deskripsi', 'tanggal', 'harga', 'user_id', 'kategori_id', 'satuan_id', 'pengadaan_id', 'gedung_id', 'lantai_id', 'ruangan_id', 'status'];
+    protected $fillable = ['kode_barang', 'gambar', 'nama', 'deskripsi', 'tanggal', 'harga', 'user_id', 'kategori_id', 'satuan_id', 'pengadaan_id', 'gedung_id', 'lantai_id', 'ruangan_id', 'subkategori_id', 'subdivisi_id', 'status'];
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            $gedung = Gedung::find($model->gedung_id);
-            $lantai = Lantai::find($model->lantai_id);
-            $ruangan = Ruangan::find($model->ruangan_id);
             $kategori = Kategori::find($model->kategori_id);
-            $pengadaan = Pengadaan::latest()->first();
+            $subkategori = Subkategori::find($model->subkategori_id);
+            $subdivisi = Subdivisi::find($model->subdivisi_id);
+            $satuan = Satuan::find($model->satuan_id);
 
             // Generate unique serial number
-            $serial = str_pad(Barang::max('id') + 1, 4, '0', STR_PAD_LEFT);
+            $serial = str_pad(Barang::withTrashed()->max('id') + 1, 4, '0', STR_PAD_LEFT);
 
-            $model->kode_barang = $gedung->id_gedungs . '.B' . str_pad(($model->id + 1), 2, '0', STR_PAD_LEFT) . '.' . $kategori->id_kategoris . '.' . $pengadaan->id_pengadaans . '.' . $serial;
+            // Generate kode_barang in the format A.01.01.01.0001
+            $model->kode_barang = $kategori->id_kategoris . '.' . $subkategori->id_subkategori . '.' . $subdivisi->id_subdivisi . '.' . $satuan->id_satuan . '.' . $serial;
         });
     }
 
@@ -84,5 +86,15 @@ class Barang extends Model
         return $this->belongsTo(Ruangan::class)->withDefault([
             'nama_ruangan' => 'Tanpa Ruangan'
         ]);
+    }
+
+    public function subkategori()
+    {
+        return $this->belongsTo(Subkategori::class);
+    }
+
+    public function subdivisi()
+    {
+        return $this->belongsTo(Subdivisi::class);
     }
 }

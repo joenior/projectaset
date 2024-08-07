@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Barang</th>
+                                    <th>Nomor Index</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
                                 </tr>

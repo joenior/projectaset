@@ -30,7 +30,7 @@
                         <hr>
                         <table style="width:100%">
                             <tr>
-                                <td><b>Kode Barang</b></td>
+                                <td><b>Nomor Index</b></td>
                                 <td>:</td>
                                 <td>{{ $barang->kode_barang }}</td>
                             </tr>
@@ -48,6 +48,16 @@
                                 <td><b>Kategori</b></td>
                                 <td>:</td>
                                 <td>{{ $barang->kategori->nama}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Subkategori</b></td>
+                                <td>:</td>
+                                <td>{{ $barang->subkategori->nama }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Subdivisi</b></td>
+                                <td>:</td>
+                                <td>{{ $barang->subdivisi->nama }}</td>
                             </tr>
                             <tr>
                                 <td><b>Satuan</b></td>

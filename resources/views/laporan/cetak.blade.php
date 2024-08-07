@@ -56,11 +56,13 @@
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>Kode Barang</th>
-					 <th>Nama Barang</th>
+					<th>Nomor Index</th>
+					<th>Nama Barang</th>
 					<th>Tanggal Pembelian</th>
 					<th>Kategori</th>
-					<th>Lokasi</th>
+					<th>Gedung</th>
+					<th>Lantai</th>
+					<th>Ruangan</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -71,7 +73,9 @@
                     <td>{{ $laporan->nama }}</td>
                     <td>{{ $laporan->tanggal }}</td>
                     <td>{{ $laporan->kategori->nama }}</td>
-                    <td>{{ $laporan->lokasi->nama_lokasi }}</td>
+                    <td>{{ $laporan->gedung->nama_gedung }}</td>
+                    <td>{{ $laporan->lantai->nama_lantai }}</td>
+                    <td>{{ $laporan->ruangan->nama_ruangan }}</td>
                 </tr>  
                 @endforeach  
 			</tbody>

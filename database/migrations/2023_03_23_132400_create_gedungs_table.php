@@ -14,7 +14,7 @@ return new class extends Migration
                 $table->string('id_gedungs')->unique();
                 $table->string('nama_gedung');
                 $table->text('deskripsi');
-                $table->foreignId('user_id')->constrained()->onDelete('cascade');
+                $table->unsignedBigInteger('user_id')->nullable(); // Make it nullable for now
                 $table->timestamps();
             });
         }

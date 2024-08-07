@@ -48,9 +48,19 @@
                             <td>{{ $pengadaan->quantity }}</td>
                         </tr>
                         <tr>
-                            <td><b>Lokasi</b></td>
+                            <td><b>Gedung</b></td>
                             <td>:</td>
-                            <td>{{ $pengadaan->lokasi->nama_lokasi}}</td>
+                            <td>{{ $pengadaan->gedung->nama_gedung }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Lantai</b></td>
+                            <td>:</td>
+                            <td>{{ $pengadaan->lantai->nama_lantai }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ruangan</b></td>
+                            <td>:</td>
+                            <td>{{ $pengadaan->ruangan->nama_ruangan }}</td>
                         </tr>
                         <tr>
                             <td><b>Deskripsi</b></td>

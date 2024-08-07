@@ -17,7 +17,9 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Roles</th>
-                                    <th>Opsi</th>
+                                    @if (auth()->user()->roles === 'admin')
+                                        <th>Opsi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,15 +28,17 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->Roles }}</td>
-                                        <td>
-                                            <a href="/datauser/{{ $user->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
-                                            <form id="{{ $user->id }}" action="/datauser/{{ $user->id }}" method="POST" class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $user->id }}"><i class="bi bi-trash-fill"></i></div>
-                                            </form>
-                                        </td>
+                                        <td>{{ $user->roles }}</td>
+                                        @if (auth()->user()->roles === 'admin')
+                                            <td>
+                                                <a href="/datauser/{{ $user->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
+                                                <form id="{{ $user->id }}" action="/datauser/{{ $user->id }}" method="POST" class="d-inline">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $user->id }}"><i class="bi bi-trash-fill"></i></div>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>  
                                 @endforeach                     
                             </tbody>

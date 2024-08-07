@@ -19,7 +19,8 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\GedungController;
 use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\RuanganController;
-
+use App\Http\Controllers\SubkategoriController;
+use App\Http\Controllers\SubdivisiController;
 
 
 /*
@@ -47,6 +48,8 @@ Route::resource('/gedung', GedungController::class);
 Route::resource('/lantai', LantaiController::class);
 Route::resource('/ruangan', RuanganController::class);
 Route::resource('/satuan', SatuanController::class);
+Route::resource('/subkategori', SubkategoriController::class);
+Route::resource('/subdivisi', SubdivisiController::class);
 
 Route::resource('/laporan', LaporanController::class);
 Route::get('cetak', [LaporanController::class, 'cetak'])->name('cetak');
@@ -71,5 +74,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/ruangan', RuanganController::class);
 });
 
+Route::middleware(['auth', 'role:admin,auditor'])->group(function(){
+    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan/cetak', [LaporanController::class, 'cetak']);
+});
 
-
+Route::middleware(['auth', 'role:admin,user,auditor'])->group(function(){
+    Route::resource('/barang', BarangController::class);
+});

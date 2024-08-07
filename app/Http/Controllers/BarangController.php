@@ -8,6 +8,8 @@ use App\Models\Lantai;
 use App\Models\Ruangan;
 use App\Models\Satuan;
 use App\Models\Kategori;
+use App\Models\Subkategori;
+use App\Models\Subdivisi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Endroid\QrCode\QrCode;
 use Illuminate\Support\Str;
@@ -40,13 +42,23 @@ class BarangController extends Controller
      */
     public function create(Request $request)
     {
+        $kategoris = Kategori::all();
+        $gedungs = Gedung::all();
+        $lantais = Lantai::all();
+        $ruangans = Ruangan::all();
+        $satuans = Satuan::all();
+        $subkategoris = Subkategori::all();
+        $subdivisis = Subdivisi::all();
+
         return view('barang.create', [
             'users'     => Auth::user(),
-            'kategoris' => Kategori::all(),
-            'gedungs'   => Gedung::all(),
-            'lantais'   => Lantai::all(),
-            'ruangans'  => Ruangan::all(),
-            'satuans'   => Satuan::all(),
+            'kategoris' => $kategoris,
+            'gedungs'   => $gedungs,
+            'lantais'   => $lantais,
+            'ruangans'  => $ruangans,
+            'satuans'   => $satuans,
+            'subkategoris' => $subkategoris,
+            'subdivisis' => $subdivisis
         ]); 
     }
 
@@ -64,7 +76,9 @@ class BarangController extends Controller
             'gedung_id'     => 'required',
             'lantai_id'     => 'required',
             'ruangan_id'    => 'required',
-            'satuan_id'     => 'required'
+            'satuan_id'     => 'required',
+            'subkategori_id' => 'required',
+            'subdivisi_id'   => 'required'
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -74,8 +88,16 @@ class BarangController extends Controller
             $validated['gambar'] = 'gambar-barang/'.$fileName;
         }
               
-        // Generate unique code
-        $validated['kode_barang'] = 'MS-' . uniqid();
+        // Generate kode_barang in the format A.01.01.01.0001
+        $kategori = Kategori::find($validated['kategori_id']);
+        $subkategori = Subkategori::find($validated['subkategori_id']);
+        $subdivisi = Subdivisi::find($validated['subdivisi_id']);
+        $satuan = Satuan::find($validated['satuan_id']);
+
+        // Generate unique serial number
+        $serial = str_pad(Barang::withTrashed()->max('id') + 1, 4, '0', STR_PAD_LEFT);
+
+        $validated['kode_barang'] = $kategori->id_kategoris . '.' . $subkategori->id_subkategori . '.' . $subdivisi->id_subdivisi . '.' . $satuan->id_satuan . '.' . $serial;
 
         $qrCode = new QrCode($validated['kode_barang']);
         $writer = new PngWriter();
@@ -109,14 +131,24 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
+        $kategoris = Kategori::all();
+        $gedungs = Gedung::all();
+        $lantais = Lantai::all();
+        $ruangans = Ruangan::all();
+        $satuans = Satuan::all();
+        $subkategoris = Subkategori::all();
+        $subdivisis = Subdivisi::all();
+
         return view('barang.edit', [
             'users'     => Auth::user(),
             'barang'    => $barang,
-            'kategoris' => Kategori::all(),
-            'gedungs'   => Gedung::all(),
-            'lantais'   => Lantai::all(),
-            'ruangans'  => Ruangan::all(),
-            'satuans'   => Satuan::all(),
+            'kategoris' => $kategoris,
+            'gedungs'   => $gedungs,
+            'lantais'   => $lantais,
+            'ruangans'  => $ruangans,
+            'satuans'   => $satuans,
+            'subkategoris' => $subkategoris,
+            'subdivisis' => $subdivisis
         ]);
     }
 
@@ -134,7 +166,9 @@ class BarangController extends Controller
             'gedung_id'     => 'required',
             'lantai_id'     => 'required',
             'ruangan_id'    => 'required',
-            'satuan_id'     => 'required'
+            'satuan_id'     => 'required',
+            'subkategori_id' => 'required',
+            'subdivisi_id'   => 'required'
         ];
 
         $validated = $request->validate($rules);
@@ -176,10 +210,15 @@ class BarangController extends Controller
         $qrCodePath = storage_path('app/public/qrcode-barang/' . $barang->kode_barang . '.png');
         $logoInstansiPath = storage_path('app/public/logo-instansi/logo.png');
 
+        if (!file_exists($qrCodePath)) {
+            // Handle the case where the QR code image does not exist
+            abort(404, 'QR code image not found.');
+        }
+
         $qrCode = base64_encode(file_get_contents($qrCodePath));
         $logoInstansi = base64_encode(file_get_contents($logoInstansiPath));
 
-        $pdf = Pdf::loadView('barang.label', [ // Gunakan alias yang benar
+        $pdf = Pdf::loadView('barang.label', [
             'users'         => Auth::user(),
             'barang'        => $barang,
             'qrCode'        => $qrCode,

@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('Roles', ['admin']);
-            $table->foreignId('lokasi_id')->nullable();
-            $table->rememberToken();
+            $table->string('roles');
+            $table->unsignedBigInteger('gedung_id')->nullable(); // Make it nullable for now
+            $table->unsignedBigInteger('lantai_id')->nullable(); // Make it nullable for now
             $table->timestamps();
         });
     }

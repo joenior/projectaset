@@ -12,7 +12,7 @@ class VerifyRole
     {
         $user = $request->user();
 
-        if ($user->roles === 'admin') {
+        if (in_array($user->roles, $roles)) {
             return $next($request);
         }
 

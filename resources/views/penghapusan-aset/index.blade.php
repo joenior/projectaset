@@ -13,9 +13,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Gambar Barang</th>
-                                    <th>Kode Barang</th>
+                                    <th>Nomor Index</th>
                                     <th>Nama Barang</th>
-                                    <th>Lokasi</th>
+                                    <th>Gedung</th>
+                                    <th>Lantai</th>
+                                    <th>Ruangan</th>
                                     <th>Tanggal Dihapus</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -24,10 +26,12 @@
                                 @foreach ($deletedBarangs as $barang)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('storage/'. $barang->gambar) }}" alt="gambar barang" style="width: 150px"; height="150px"></td>
+                                        <td><img src="{{ asset('storage/'. $barang->gambar) }}" alt="gambar barang" style="width: 150px; height: 150px;"></td>
                                         <td>{{ $barang->kode_barang }}</td>
                                         <td>{{ $barang->nama }}</td>
-                                        <td>{{ $barang->lokasi->nama_lokasi }}</td>
+                                        <td>{{ $barang->gedung->nama_gedung }}</td>
+                                        <td>{{ $barang->lantai->nama_lantai }}</td>
+                                        <td>{{ $barang->ruangan->nama_ruangan }}</td>
                                         <td>{{ $barang->deleted_at }}</td>
                                         <td>
                                             <form action="/penghapusan-aset/restore/{{ $barang->id }}" method="POST">

@@ -18,7 +18,8 @@ class Kategori extends Model
 
         static::creating(function ($model) {
             $latest = static::latest()->first();
-            $model->id_kategoris = 'K' . str_pad(($latest ? $latest->id + 1 : 1), 2, '0', STR_PAD_LEFT);
+            $nextId = $latest ? $latest->id + 1 : 1;
+            $model->id_kategoris = chr(64 + $nextId); // Convert number to alphabet (1 -> A, 2 -> B, etc.)
         });
     }
 

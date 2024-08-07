@@ -35,10 +35,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Barang</th>
+                                    <th>Nomor Index</th>
                                     <th>Nama Barang</th>
                                     <th>Kategori</th>
-                                    <th>Lokasi</th>
+                                    <th>Gedung</th>
+                                    <th>Lantai</th>
+                                    <th>Ruangan</th>
                                     <th>Tgl. Upload</th>
                                 </tr>
                             </thead>
@@ -49,7 +51,9 @@
                                         <td>{{ $laporan->kode_barang }}</td>
                                         <td>{{ $laporan->nama }}</td>
                                         <td>{{ $laporan->kategori->nama }}</td>
-                                        <td>{{ $laporan->lokasi->nama_lokasi }}</td>
+                                        <td>{{ $laporan->gedung->nama_gedung }}</td>
+                                        <td>{{ $laporan->lantai->nama_lantai }}</td>
+                                        <td>{{ $laporan->ruangan->nama_ruangan }}</td>
                                         <td>{{ $laporan->tanggal }}</td>
                                     </tr>  
                                 @endforeach                     
@@ -64,14 +68,14 @@
     <script>
         $(document).ready(function() {
             var table = $('#table_id').DataTable({
-                "order": [[5, "asc"]]
+                "order": [[7, "asc"]]
             });
 
             $('#tanggal-mulai, #tanggal-selesai').change(function() {
                 var tanggalMulai = $('#tanggal-mulai').val();
                 var tanggalSelesai = $('#tanggal-selesai').val();
-                table.columns(5).search('').draw();
-                table.columns(5).search(tanggalMulai + ' - ' + tanggalSelesai).draw();
+                table.columns(7).search('').draw();
+                table.columns(7).search(tanggalMulai + ' - ' + tanggalSelesai).draw();
             });
         });
    </script>

@@ -10,6 +10,8 @@ use App\Models\Ruangan;
 use App\Models\Kategori;
 use App\Models\Pengadaan;
 use App\Models\Satuan;
+use App\Models\Subkategori;
+use App\Models\Subdivisi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +25,21 @@ class DatabaseSeeder extends Seeder
             'name'      => 'Admin User',
             'email'     => 'admin@example.com',
             'password'  => bcrypt('password'),
-            'Roles'     => 'admin'
+            'roles'     => 'admin'
+        ]);
+
+        User::create([
+            'name'      => 'Auditor User',
+            'email'     => 'auditor@example.com',
+            'password'  => bcrypt('password'),
+            'roles'     => 'auditor'
+        ]);
+
+        User::create([
+            'name'      => 'Regular User',
+            'email'     => 'user@example.com',
+            'password'  => bcrypt('password'),
+            'roles'     => 'user'
         ]);
 
         Gedung::create([
@@ -50,9 +66,9 @@ class DatabaseSeeder extends Seeder
         ]);
         
         Kategori::create([
-            'id_kategoris' => 'K01',
-            'nama'         => 'Elektronik',
-            'deskripsi'    => 'Deskripsi dari kategori elektronik',
+            'id_kategoris' => 'A',
+            'nama'         => 'Perabot',
+            'deskripsi'    => 'Deskripsi dari kategori perabot',
             'user_id'      => 1
         ]);
         
@@ -69,9 +85,21 @@ class DatabaseSeeder extends Seeder
         ]);
         
         Satuan::create([
-            'nama'      => 'Unit',
-            'deskripsi' => 'Deskripsi dari satuan unit',
-            'user_id'   => 1
+            'id_satuan'    => '01',
+            'nama'         => 'Unit',
+            'deskripsi'    => 'Deskripsi dari satuan unit',
+            'user_id'      => 1
+        ]);
+        
+        Subkategori::create([
+            'nama'      => 'Kursi',
+            'deskripsi' => 'Deskripsi dari subkategori A'
+        ]);
+        
+        Subdivisi::create([
+            'id_subdivisi' => '01',
+            'nama'         => 'Berlengan',
+            'deskripsi'     => 'Deskripsi dari subdivisi A'
         ]);
     }
 }

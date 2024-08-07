@@ -22,8 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'roles' => 'admin',
-        'lokasi_id'
+        'roles',
+        'gedung_id',
+        'lantai_id',
+        'ruangan_id'
     ];
 
     /**
@@ -45,11 +47,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function lokasi()
+    public function gedung()
     {
-        return $this->belongsTo(Lokasi::class)->withDefault([
-            'nama_lokasi' => 'Tanpa Lokasi'
+        return $this->belongsTo(Gedung::class)->withDefault([
+            'nama_gedung' => 'Tanpa Gedung'
         ]);
     }
 
+    public function lantai()
+    {
+        return $this->belongsTo(Lantai::class)->withDefault([
+            'nama_lantai' => 'Tanpa Lantai'
+        ]);
+    }
+
+    public function ruangan()
+    {
+        return $this->belongsTo(Ruangan::class)->withDefault([
+            'nama_ruangan' => 'Tanpa Ruangan'
+        ]);
+    }
 }

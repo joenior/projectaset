@@ -20,19 +20,18 @@ class StatistikController extends Controller
                     ->get();
 
         $chart = new \stdClass();
-        $chart->type    = 'bar';
+        $chart->type    = 'line';
         $chart->labels  = $barang->pluck('tahun');
         $chart->data    = $barang->pluck('total');
 
         // Pie Statistik Kategori
-        $kategori = Kategori::select('nama', DB::raw('count(*) as total'))
-                        ->groupBy('nama')
-                        ->get();
+        $kategori = Kategori::all();
 
         $pieChart = new \stdClass();
-        $pieChart->type     = 'pie';
-        $pieChart->labels   = $kategori->pluck('nama');
-        $pieChart->data     = $kategori->pluck('total');
+        $pieChart->labels = $kategori->pluck('nama');
+        $pieChart->data   = $kategori->map(function($k) {
+            return $k->barangs->count();
+        });
 
         // Pie Statistik Gedung
         $gedung = Gedung::select('nama_gedung', DB::raw('(SELECT COUNT(*) FROM barangs WHERE gedung_id = gedungs.id) as total'))
@@ -77,8 +76,11 @@ class StatistikController extends Controller
             'pieChart'      => $pieChart,
             'kategori'      => $kategori,
             'gedungChart'   => $gedungChart,
+            'gedung'        => $gedung,
             'lantaiChart'   => $lantaiChart,
+            'lantai'        => $lantai,
             'ruanganChart'  => $ruanganChart,
+            'ruangan'       => $ruangan,
             'keuanganChart' => $keuanganChart,
         ]);
     }

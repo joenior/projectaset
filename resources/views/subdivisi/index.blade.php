@@ -1,10 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <a class="btn btn-primary float-end" href="/satuan/create" Roles="button"><i class="bi bi-hdd-stack"></i>  Tambah satuan</a>
-    <h1 class="h3 mb-4">Jenis satuan</h1>
+    <a class="btn btn-primary float-end" href="/subdivisi/create" role="button"><i class="bi bi-diagram-3"></i> Tambah Subdivisi</a>
+    <h1 class="h3 mb-4">Data Subdivisi</h1>
    
-
     <div class="row">
         <div class="col">
             <div class="card">
@@ -14,25 +13,25 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID Satuan</th>
-                                    <th>Nama Satuan</th>
+                                    <th>ID Subdivisi</th>
+                                    <th>Nama Subdivisi</th>
                                     <th>Deskripsi</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($satuans as $satuan)
+                                @foreach ($subdivisis as $subdivisi)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $satuan->id_satuan }}</td>
-                                        <td>{{ $satuan->nama }}</td>
-                                        <td>{{ $satuan->deskripsi }}</td>
+                                        <td>{{ $subdivisi->id_subdivisi }}</td>
+                                        <td>{{ $subdivisi->nama }}</td>
+                                        <td>{{ $subdivisi->deskripsi }}</td>
                                         <td>
-                                            <a href="/satuan/{{ $satuan->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
-                                            <form action="/satuan/{{ $satuan->id }}" method="POST" class="d-inline">
+                                            <a href="/subdivisi/{{ $subdivisi->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
+                                            <form action="/subdivisi/{{ $subdivisi->id }}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus satuan ini?')"><i class="bi bi-trash-fill"></i></button>
+                                                <button class="btn btn-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus subdivisi ini?')"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
                                     </tr>  
@@ -46,9 +45,8 @@
     </div>
 
     <script>
-        $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
     </script>
-
 @endsection

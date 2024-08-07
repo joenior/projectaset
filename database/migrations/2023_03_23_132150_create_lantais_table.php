@@ -28,10 +28,10 @@ return new class extends Migration
                 $table->text('deskripsi')->nullable();
             }
             if (!Schema::hasColumn('lantais', 'gedung_id')) {
-                $table->foreignId('gedung_id')->nullable()->constrained()->onDelete('cascade');
+                $table->unsignedBigInteger('gedung_id')->nullable();
             }
             if (!Schema::hasColumn('lantais', 'user_id')) {
-                $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+                $table->unsignedBigInteger('user_id')->nullable();
             }
         });
     }
@@ -49,11 +49,9 @@ return new class extends Migration
                 $table->dropColumn('deskripsi');
             }
             if (Schema::hasColumn('lantais', 'gedung_id')) {
-                $table->dropForeign(['gedung_id']);
                 $table->dropColumn('gedung_id');
             }
             if (Schema::hasColumn('lantais', 'user_id')) {
-                $table->dropForeign(['user_id']);
                 $table->dropColumn('user_id');
             }
         });

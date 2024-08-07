@@ -13,9 +13,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Gambar Barang</th>
-                                    <th>Kode Barang</th>
+                                    <th>Nomor Index</th>
                                     <th>Nama Barang</th>
-                                    <th>Lokasi</th>
+                                    <th>Gedung</th>
+                                    <th>Lantai</th>
+                                    <th>Ruangan</th>
                                     <th>Cetak Label</th>
                                 </tr>
                             </thead>
@@ -26,7 +28,9 @@
                                         <td><img src="{{ asset('storage/'. $barang->gambar) }}" alt="gambar barang" style="width: 150px"; height="150px"></td>
                                         <td>{{ $barang->kode_barang }}</td>
                                         <td>{{ $barang->nama }}</td>
-                                        <td>{{ $barang->lokasi->nama_lokasi }}</td>
+                                        <td>{{ $barang->gedung->nama_gedung }}</td>
+                                        <td>{{ $barang->lantai->nama_lantai }}</td>
+                                        <td>{{ $barang->ruangan->nama_ruangan }}</td>
                                         <td>
                                             <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
                                         </td>

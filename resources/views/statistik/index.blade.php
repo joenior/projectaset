@@ -51,34 +51,92 @@
             </div>
         </div>
 
-            {{-- Pie Statistik Lokasi --}}
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Lokasi Sebaran Aset</h5>
-                    </div>
-                    <div class="card-body d-flex">
-                        <div class="align-self-center w-100">
-                            <div class="py-3">
-                                <div class="chart chart-xs">
-                                    <canvas id="chartjs-dashboard-pie-lokasi"></canvas>
-                                </div>
+        {{-- Pie Statistik Gedung --}}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Gedung Sebaran Aset</h5>
+                </div>
+                <div class="card-body d-flex">
+                    <div class="align-self-center w-100">
+                        <div class="py-3">
+                            <div class="chart chart-xs">
+                                <canvas id="chartjs-dashboard-pie-gedung"></canvas>
                             </div>
-    
-                            <table class="table mb-0">
-                                <tbody>
-                                    @foreach ($lokasi as $l)
-                                        <tr>
-                                            <td>{{ $l->nama_lokasi }}</td>
-                                            <td class="text-end">{{ $l->total}} aset</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
                         </div>
+    
+                        <table class="table mb-0">
+                            <tbody>
+                                @foreach ($gedung as $g)
+                                    <tr>
+                                        <td>{{ $g->nama_gedung }}</td>
+                                        <td class="text-end">{{ $g->total}} aset</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
+
+        {{-- Pie Statistik Lantai --}}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Lantai Sebaran Aset</h5>
+                </div>
+                <div class="card-body d-flex">
+                    <div class="align-self-center w-100">
+                        <div class="py-3">
+                            <div class="chart chart-xs">
+                                <canvas id="chartjs-dashboard-pie-lantai"></canvas>
+                            </div>
+                        </div>
+    
+                        <table class="table mb-0">
+                            <tbody>
+                                @foreach ($lantai as $l)
+                                    <tr>
+                                        <td>{{ $l->nama_lantai }}</td>
+                                        <td class="text-end">{{ $l->total}} aset</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Pie Statistik Ruangan --}}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Ruangan Sebaran Aset</h5>
+                </div>
+                <div class="card-body d-flex">
+                    <div class="align-self-center w-100">
+                        <div class="py-3">
+                            <div class="chart chart-xs">
+                                <canvas id="chartjs-dashboard-pie-ruangan"></canvas>
+                            </div>
+                        </div>
+    
+                        <table class="table mb-0">
+                            <tbody>
+                                @foreach ($ruangan as $r)
+                                    <tr>
+                                        <td>{{ $r->nama_ruangan }}</td>
+                                        <td class="text-end">{{ $r->total}} aset</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 	<div class="row">
@@ -99,11 +157,6 @@
 		</div>
 	</div>
 
-
-
-    
-    
-    
     {{-- Grafik Aset --}}
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -195,22 +248,25 @@
 		});
 	</script>
 
-     {{-- Pie Statistik Lokasi--}}
+     {{-- Pie Statistik Gedung--}}
      <script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie-lokasi"), {
+			new Chart(document.getElementById("chartjs-dashboard-pie-gedung"), {
 				type: "pie",
 				data: {
-					labels: {!! json_encode($lokasiChart->labels) !!},
+					labels: {!! json_encode($gedungChart->labels) !!},
 					datasets: [{
-						data: {!! json_encode($lokasiChart->data) !!},
+						data: {!! json_encode($gedungChart->data) !!},
 						backgroundColor: [
                             window.theme.success,
 							window.theme.secondary,
 							window.theme.primary,
 							window.theme.warning,
 							window.theme.danger,
+							window.theme.info,
+							window.theme.light,
+							window.theme.dark
 						],
 						borderWidth: 5
 					}]
@@ -227,7 +283,75 @@
 		});
 	</script>
 
+    {{-- Pie Statistik Lantai--}}
+    <script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie-lantai"), {
+				type: "pie",
+				data: {
+					labels: {!! json_encode($lantaiChart->labels) !!},
+					datasets: [{
+						data: {!! json_encode($lantaiChart->data) !!},
+						backgroundColor: [
+                            window.theme.success,
+							window.theme.secondary,
+							window.theme.primary,
+							window.theme.warning,
+							window.theme.danger,
+							window.theme.info,
+							window.theme.light,
+							window.theme.dark
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		});
+	</script>
 
+    {{-- Pie Statistik Ruangan--}}
+    <script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie-ruangan"), {
+				type: "pie",
+				data: {
+					labels: {!! json_encode($ruanganChart->labels) !!},
+					datasets: [{
+						data: {!! json_encode($ruanganChart->data) !!},
+						backgroundColor: [
+                            window.theme.success,
+							window.theme.secondary,
+							window.theme.primary,
+							window.theme.warning,
+							window.theme.danger,
+							window.theme.info,
+							window.theme.light,
+							window.theme.dark
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		});
+	</script>
 
 	{{-- Total Harga Statistik --}}
 	<script>
@@ -292,6 +416,4 @@
 		});
 	</script>
 	
-		
-
 @endsection

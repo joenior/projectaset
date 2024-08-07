@@ -33,20 +33,22 @@
                 </a>
 
                 <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/home">
-                            <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->roles === 'admin')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/home">
+                                <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
+                            </a>
+                        </li>
 
-                    <li class="sidebar-header">
-                        Data User
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/datauser/">
-                            <i class="bi bi-people"></i> <span class="align-middle">Data User</span>
-                        </a>
-                    </li>
+                        <li class="sidebar-header">
+                            Data User
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/datauser/">
+                                <i class="bi bi-people"></i> <span class="align-middle">Data User</span>
+                            </a>
+                        </li>
+                    @endif
 
                     <li class="sidebar-header">
                         Data Master Aset
@@ -61,71 +63,86 @@
                             <i class="bi bi-tags"></i> <span class="align-middle">Kategori</span>
                         </a>
                     </li>
-
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/subkategori/">
+                            <i class="bi bi-diagram-3"></i> <span class="align-middle">Subkategori</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/subdivisi/">
+                            <i class="bi bi-diagram-3"></i> <span class="align-middle">Subdivisi</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/satuan/">
-                            <i class="bi bi-hdd-stack"></i><span class="align-middle">Satuan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-header">
-                        Data Master Lokasi
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/gedung/">
-                            <i class="bi bi-geo-alt"></i> <span class="align-middle">Gedung</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/lantai/">
-                            <i class="bi bi-geo-alt"></i> <span class="align-middle">Lantai</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/ruangan/">
-                            <i class="bi bi-geo-alt"></i> <span class="align-middle">Ruangan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-header">
-                        Laporan
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/statistik/">
-                            <i class="bi bi-clipboard-data"></i> <span class="align-middle">Statistik</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/keuangan/">
-                            <i class="bi bi-currency-dollar"></i> <span class="align-middle">Keuangan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/laporan/">
-                            <i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/label/">
-                            <i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
+                            <i class="bi bi-hdd-stack"></i><span class="align-middle">Unit</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-header">
-                        Riwayat
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/penghapusan-aset/">
-                            <i class="bi bi-clock-history"></i> <span class="align-middle">Penghapusan Aset</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->roles === 'admin' || auth()->user()->roles === 'auditor')
+                        <li class="sidebar-header">
+                            Laporan
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/statistik/">
+                                <i class="bi bi-clipboard-data"></i> <span class="align-middle">Statistik</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/keuangan/">
+                                <i class="bi bi-currency-dollar"></i> <span class="align-middle">Keuangan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/laporan/">
+                                <i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/label/">
+                                <i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="sidebar-header">
-                        Pengaturan
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/reset-password/">
-                            <i class="bi bi-unlock"></i> <span class="align-middle">Reset Password</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->roles === 'admin')
+                        <li class="sidebar-header">
+                            Data Master Lokasi
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/gedung/">
+                                <i class="bi bi-geo-alt"></i> <span class="align-middle">Gedung</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/lantai/">
+                                <i class="bi bi-geo-alt"></i> <span class="align-middle">Lantai</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/ruangan/">
+                                <i class="bi bi-geo-alt"></i> <span class="align-middle">Ruangan</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-header">
+                            Riwayat
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/penghapusan-aset/">
+                                <i class="bi bi-clock-history"></i> <span class="align-middle">Penghapusan Aset</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-header">
+                            Pengaturan
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/reset-password/">
+                                <i class="bi bi-unlock"></i> <span class="align-middle">Reset Password</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>

@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_barang')->unique();
-            $table->string('gambar');
             $table->string('nama');
             $table->text('deskripsi');
-            $table->double('harga');
-            $table->date('tanggal');
-            $table->foreignId('user_id');
-            $table->foreignId('kategori_id')->nullable();
-            $table->foreignId('satuan_id')->nullable();
-            $table->foreignId('pengadaan_id')->nullable();
-            $table->foreignId('gedung_id')->nullable();
-            $table->foreignId('lantai_id')->nullable();
-            $table->foreignId('ruangan_id')->nullable();
+            $table->string('gambar');
+            $table->decimal('harga', 10, 2);
+            $table->foreignId('kategori_id')->constrained();
+            $table->foreignId('gedung_id')->constrained();
+            $table->foreignId('lantai_id')->constrained();
+            $table->foreignId('ruangan_id')->constrained();
+            $table->foreignId('satuan_id')->constrained();
+            $table->foreignId('subkategori_id')->constrained();
+            $table->foreignId('subdivisi_id')->constrained();
+            $table->string('kode_barang')->unique();
+            $table->timestamp('tanggal');
+            $table->foreignId('user_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
