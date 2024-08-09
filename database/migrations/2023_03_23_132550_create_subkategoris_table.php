@@ -13,12 +13,16 @@ return new class extends Migration
             $table->string('id_subkategori')->unique();
             $table->string('nama');
             $table->text('deskripsi')->nullable();
+            $table->foreignId('kategori_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('subkategoris');
+        Schema::table('subkategoris', function (Blueprint $table) {
+            $table->dropForeign(['kategori_id']);
+            $table->dropColumn('kategori_id');
+        });
     }
 };

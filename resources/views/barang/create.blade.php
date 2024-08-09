@@ -28,16 +28,6 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="deskripsi" class="form-label">Deskripsi</label>
-                                <textarea name="deskripsi" id="text" cols="30" rows="10" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
-                                @error('deskripsi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="harga" class="form-label">Harga</label>
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Rp</span>
@@ -48,6 +38,69 @@
                                         </div>
                                     @enderror
                                 </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kategori" class="form-label">Kategori</label>
+                                <select class="form-select" id="kategori" name="kategori_id">
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach ($kategoris as $kategori)
+                                        <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="subkategori" class="form-label">Subkategori</label>
+                                <select class="form-select" id="subkategori" name="subkategori_id" disabled>
+                                    <option value="">Pilih Subkategori</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="subdivisi" class="form-label">Subdivisi</label>
+                                <select class="form-select" id="subdivisi" name="subdivisi_id" disabled>
+                                    <option value="">Pilih Subdivisi</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="satuan" class="form-label">Satuan</label>
+                                <select class="form-select" id="satuan" name="satuan_id" disabled>
+                                    <option value="">Pilih Satuan</option>
+                                </select>
+                            </div>
+
+                            <!-- Data Master Lokasi -->
+                            <h2 class="h4 mb-3">Data Master Lokasi</h2>
+
+                            <div class="mb-3">
+                                <label for="gedung" class="form-label">Gedung</label>
+                                <select class="form-select" id="gedung" name="gedung_id">
+                                    <option value="">Pilih Gedung</option>
+                                    @foreach ($gedungs as $gedung)
+                                        <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="lantai" class="form-label">Lantai</label>
+                                <select class="form-select" id="lantai" name="lantai_id" disabled>
+                                    <option value="">Pilih Lantai</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ruangan" class="form-label">Ruangan</label>
+                                <select class="form-select" id="ruangan" name="ruangan_id" disabled>
+                                    <option value="">Pilih Ruangan</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tanggal" class="form-label">Tanggal</label>
+                                <input class="form-control" type="text" value="{{ date('d/m/Y') }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
                             </div>
 
                             <div class="mb-3">
@@ -62,102 +115,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="kategori" class="form-label">Kategori</label>
-                                <select class="form-select" aria-label="Default select example" id="kategori" name="kategori_id">
-                                    @foreach ($kategoris as $kategori)
-                                        @if (old('kategori_id') == $kategori->id)
-                                            <option value="{{ $kategori->id }}" selected>{{ $kategori->nama }}</option>
-                                        @else
-                                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="subkategori" class="form-label">Subkategori</label>
-                                <select class="form-select" aria-label="Default select example" id="subkategori" name="subkategori_id">
-                                    @foreach ($subkategoris as $subkategori)
-                                        @if (old('subkategori_id') == $subkategori->id)
-                                            <option value="{{ $subkategori->id }}" selected>{{ $subkategori->nama }}</option>
-                                        @else
-                                            <option value="{{ $subkategori->id }}">{{ $subkategori->nama }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="subdivisi" class="form-label">Subdivisi</label>
-                                <select class="form-select" aria-label="Default select example" id="subdivisi" name="subdivisi_id">
-                                    @foreach ($subdivisis as $subdivisi)
-                                        @if (old('subdivisi_id') == $subdivisi->id)
-                                            <option value="{{ $subdivisi->id }}" selected>{{ $subdivisi->nama }}</option>
-                                        @else
-                                            <option value="{{ $subdivisi->id }}">{{ $subdivisi->nama }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="satuan" class="form-label">Satuan</label>
-                                <select class="form-select" aria-label="Default select example" id="satuan" name="satuan_id">
-                                    @foreach ($satuans as $satuan)
-                                        @if (old('satuan_id') == $satuan->id)
-                                            <option value="{{ $satuan->id }}" selected>{{ $satuan->nama }}</option>
-                                        @else
-                                            <option value="{{ $satuan->id }}">{{ $satuan->nama }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Data Master Lokasi -->
-                            <h2 class="h4 mb-3">Data Master Lokasi</h2>
-
-                            <div class="mb-3">
-                                <label for="gedung" class="form-label">Gedung</label>
-                                <select class="form-select" aria-label="Default select example" id="gedung" name="gedung_id">
-                                    @foreach ($gedungs as $gedung)
-                                        @if (old('gedung_id') == $gedung->id)
-                                            <option value="{{ $gedung->id }}" selected>{{ $gedung->nama_gedung }}</option>
-                                        @else
-                                            <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="lantai" class="form-label">Lantai</label>
-                                <select class="form-select" aria-label="Default select example" id="lantai" name="lantai_id">
-                                    @foreach ($lantais as $lantai)
-                                        @if (old('lantai_id') == $lantai->id)
-                                            <option value="{{ $lantai->id }}" selected>{{ $lantai->nama_lantai }}</option>
-                                        @else
-                                            <option value="{{ $lantai->id }}">{{ $lantai->nama_lantai }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="ruangan" class="form-label">Ruangan</label>
-                                <select class="form-select" aria-label="Default select example" id="ruangan" name="ruangan_id">
-                                    @foreach ($ruangans as $ruangan)
-                                        @if (old('ruangan_id') == $ruangan->id)
-                                            <option value="{{ $ruangan->id }}" selected>{{ $ruangan->nama_ruangan }}</option>
-                                        @else
-                                            <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tanggal" class="form-label">Tanggal</label>
-                                <input class="form-control" type="text" value="{{ date('d/m/Y') }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
+                                <label for="deskripsi" class="form-label">Deskripsi</label>
+                                <textarea name="deskripsi" id="text" cols="30" rows="10" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
+                                @error('deskripsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary float-end">Simpan</button>
@@ -171,9 +135,101 @@
 </div>
 
 <script>
-    function previewImage(){
-        preview.src=URL.createObjectURL(event.target.files[0]);
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    const kategoriSelect = document.getElementById('kategori');
+    const subkategoriSelect = document.getElementById('subkategori');
+    const subdivisiSelect = document.getElementById('subdivisi');
+    const satuanSelect = document.getElementById('satuan');
+    const gedungSelect = document.getElementById('gedung');
+    const lantaiSelect = document.getElementById('lantai');
+    const ruanganSelect = document.getElementById('ruangan');
+
+    kategoriSelect.addEventListener('change', function () {
+        const kategoriId = this.value;
+        subkategoriSelect.disabled = true;
+        subdivisiSelect.disabled = true;
+        satuanSelect.disabled = true;
+        if (kategoriId) {
+            fetch(`/api/subkategori/${kategoriId}`)
+                .then(response => response.json())
+                .then(data => {
+                    subkategoriSelect.innerHTML = '<option value="">Pilih Subkategori</option>';
+                    data.forEach(subkategori => {
+                        subkategoriSelect.innerHTML += `<option value="${subkategori.id}">${subkategori.nama}</option>`;
+                    });
+                    subkategoriSelect.disabled = false;
+                });
+        }
+    });
+
+    subkategoriSelect.addEventListener('change', function () {
+        const subkategoriId = this.value;
+        subdivisiSelect.disabled = true;
+        satuanSelect.disabled = true;
+        if (subkategoriId) {
+            fetch(`/api/subdivisi/${subkategoriId}`)
+                .then(response => response.json())
+                .then(data => {
+                    subdivisiSelect.innerHTML = '<option value="">Pilih Subdivisi</option>';
+                    data.forEach(subdivisi => {
+                        subdivisiSelect.innerHTML += `<option value="${subdivisi.id}">${subdivisi.nama}</option>`;
+                    });
+                    subdivisiSelect.disabled = false;
+                });
+        }
+    });
+
+    subdivisiSelect.addEventListener('change', function () {
+        const subdivisiId = this.value;
+        if (subdivisiId) {
+            fetch(`/api/satuan/${subdivisiId}`)
+                .then(response => response.json())
+                .then(data => {
+                    satuanSelect.innerHTML = '<option value="">Pilih Satuan</option>';
+                    data.forEach(satuan => {
+                        satuanSelect.innerHTML += `<option value="${satuan.id}">${satuan.nama}</option>`;
+                    });
+                    satuanSelect.disabled = false;
+                });
+        }
+    });
+
+    gedungSelect.addEventListener('change', function () {
+        const gedungId = this.value;
+        lantaiSelect.disabled = true;
+        ruanganSelect.disabled = true;
+        if (gedungId) {
+            fetch(`/api/lantai/${gedungId}`)
+                .then(response => response.json())
+                .then(data => {
+                    lantaiSelect.innerHTML = '<option value="">Pilih Lantai</option>';
+                    data.forEach(lantai => {
+                        lantaiSelect.innerHTML += `<option value="${lantai.id}">${lantai.nama_lantai}</option>`;
+                    });
+                    lantaiSelect.disabled = false;
+                });
+        }
+    });
+
+    lantaiSelect.addEventListener('change', function () {
+        const lantaiId = this.value;
+        if (lantaiId) {
+            fetch(`/api/ruangan/${lantaiId}`)
+                .then(response => response.json())
+                .then(data => {
+                    ruanganSelect.innerHTML = '<option value="">Pilih Ruangan</option>';
+                    data.forEach(ruangan => {
+                        ruanganSelect.innerHTML += `<option value="${ruangan.id}">${ruangan.nama_ruangan}</option>`;
+                    });
+                    ruanganSelect.disabled = false;
+                });
+        }
+    });
+});
+
+function previewImage(){
+    preview.src=URL.createObjectURL(event.target.files[0]);
+}
 </script>
 
 @endsection

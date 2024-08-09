@@ -20,4 +20,9 @@ class Subdivisi extends Model
             $model->id_subdivisi = str_pad(($latest ? $latest->id + 1 : 1), 2, '0', STR_PAD_LEFT);
         });
     }
+
+    public function satuans()
+    {
+        return $this->hasMany(Satuan::class);
+    }
 }

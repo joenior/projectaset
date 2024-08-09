@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+use App\Http\Controllers\ApiController;
+
+Route::get('/subkategori/{kategoriId}', [ApiController::class, 'getSubkategori']);
+Route::get('/subdivisi/{subkategoriId}', [ApiController::class, 'getSubdivisi']);
+Route::get('/satuan/{subdivisiId}', [ApiController::class, 'getSatuan']);
+Route::get('/lantai/{gedungId}', [ApiController::class, 'getLantai']);
+Route::get('/ruangan/{lantaiId}', [ApiController::class, 'getRuangan']);

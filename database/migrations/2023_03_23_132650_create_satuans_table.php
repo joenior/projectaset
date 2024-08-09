@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('id_satuan')->unique();
             $table->string('nama');
             $table->text('deskripsi');
-            $table->foreignId('user_id');
+            $table->foreignId('subdivisi_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

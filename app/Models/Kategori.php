@@ -11,6 +11,7 @@ class Kategori extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
+    protected $fillable = ['id_kategoris', 'nama', 'deskripsi', 'user_id'];
 
     protected static function boot()
     {
@@ -31,5 +32,10 @@ class Kategori extends Model
     public function barangs()
     {
         return $this->hasMany(Barang::class);
+    }
+
+    public function subkategoris()
+    {
+        return $this->hasMany(Subkategori::class);
     }
 }

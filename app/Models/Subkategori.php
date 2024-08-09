@@ -9,7 +9,7 @@ class Subkategori extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_subkategori', 'nama', 'deskripsi'];
+    protected $fillable = ['id_subkategori', 'nama', 'deskripsi', 'kategori_id'];
 
     protected static function boot()
     {
@@ -19,5 +19,15 @@ class Subkategori extends Model
             $latest = static::latest()->first();
             $model->id_subkategori = str_pad(($latest ? $latest->id_subkategori + 1 : 1), 2, '0', STR_PAD_LEFT);
         });
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
+    public function subdivisis()
+    {
+        return $this->hasMany(Subdivisi::class);
     }
 }

@@ -45,8 +45,7 @@
             </form>
 
             <p class="text-center">
-                <span>Lupa Kata Sandi ?</span>
-                <span>Segera Hubungi Admin</span>
+                <span>(c) 2024 Steven Joenior Naibaho</span>
             </p>
           </div>
         </div>

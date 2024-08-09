@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('id_subdivisi')->unique();
             $table->string('nama');
             $table->text('deskripsi')->nullable();
+            $table->foreignId('subkategori_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

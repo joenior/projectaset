@@ -84,22 +84,25 @@ class DatabaseSeeder extends Seeder
             'ruangan_id'    => 1
         ]);
         
-        Satuan::create([
-            'id_satuan'    => '01',
-            'nama'         => 'Unit',
-            'deskripsi'    => 'Deskripsi dari satuan unit',
-            'user_id'      => 1
-        ]);
-        
         Subkategori::create([
             'nama'      => 'Kursi',
-            'deskripsi' => 'Deskripsi dari subkategori A'
+            'deskripsi' => 'Deskripsi dari subkategori A',
+            'kategori_id' => 1 // Ensure this is a valid kategori_id
         ]);
         
         Subdivisi::create([
             'id_subdivisi' => '01',
             'nama'         => 'Berlengan',
-            'deskripsi'     => 'Deskripsi dari subdivisi A'
+            'deskripsi'    => 'Deskripsi dari subdivisi A',
+            'subkategori_id' => 1 // Ensure this is a valid subkategori_id
+        ]);
+
+        Satuan::create([
+            'id_satuan'    => '01',
+            'nama'         => 'Unit',
+            'deskripsi'    => 'Deskripsi dari satuan unit',
+            'subdivisi_id' => 1, // Ensure this is a valid subdivisi_id
+            'user_id'      => 1 // Ensure this is a valid user_id
         ]);
     }
 }
