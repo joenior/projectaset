@@ -45,8 +45,8 @@
 			<img src="data:image/png;base64,{{ $logoInstansi }}" alt="Logo Instansi" style="width:100px" height="100px">
 		</div>
 		<div class="header">
-			<h1>Replace meeeee</h1>
-			<p>And meeee</p>
+			<h1>Laporan Data Aset</h1>
+			<p>Contoh Laporan Data Aset</p>
 		</div>
 
 		<h3 style="text-align: center">

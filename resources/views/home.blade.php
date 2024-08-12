@@ -7,8 +7,8 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h3>Sistem Informasi Manajemen Aset</h3>
-                    <p>Sistem informasi manajemen aset adalah sistem yang dirancang untuk membantu organisasi mengelola aset mereka dengan lebih efektif dan efisien. Aset dapat mencakup segala hal dari properti fisik seperti gedung, kendaraan, peralatan, dan inventaris</p>
+                    <h3>Sistem Informasi Aset</h3>
+                    <p>Sistem informasi Aset adalah sistem yang dirancang untuk membantu dalam mengelola aset. Aset dapat mencakup segala hal dari properti fisik seperti gedung, kendaraan, peralatan, dan inventaris</p>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Pengguna Terdaftar</h5>
+                                            <h5 class="card-title">Akun</h5>
                                         </div>
     
                                         <div class="col-auto">

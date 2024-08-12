@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subdivisi;
+use App\Models\Subkategori;
 use Illuminate\Http\Request;
 
 class SubdivisiController extends Controller
@@ -15,7 +16,8 @@ class SubdivisiController extends Controller
 
     public function create()
     {
-        return view('subdivisi.create');
+        $subkategoris = Subkategori::all();
+        return view('subdivisi.create', compact('subkategoris'));
     }
 
     public function store(Request $request)
@@ -23,6 +25,7 @@ class SubdivisiController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'deskripsi' => 'nullable',
+            'subkategori_id' => 'required|exists:subkategoris,id',
         ]);
 
         Subdivisi::create($validated);
@@ -31,7 +34,8 @@ class SubdivisiController extends Controller
 
     public function edit(Subdivisi $subdivisi)
     {
-        return view('subdivisi.edit', compact('subdivisi'));
+        $subkategoris = Subkategori::all();
+        return view('subdivisi.edit', compact('subdivisi', 'subkategoris'));
     }
 
     public function update(Request $request, Subdivisi $subdivisi)
@@ -39,6 +43,7 @@ class SubdivisiController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'deskripsi' => 'nullable',
+            'subkategori_id' => 'required|exists:subkategoris,id',
         ]);
 
         $subdivisi->update($validated);

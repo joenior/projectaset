@@ -34,7 +34,9 @@
                         <div class="mb-3">
                             <label for="Roles" class="form-label">Roles</label>
                             <select class="form-select @error('Roles') is-invalid @enderror" aria-label="Default select example" name="Roles" id="Roles">
-                                <option value="admin" {{ old('Roles', $user->Roles) == 'admin' ? 'selected' : '' }}>Admin</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}" {{ old('Roles', $user->Roles) == $role ? 'selected' : '' }}>{{ ucfirst($role) }}</option>
+                                @endforeach
                             </select>
                             @error('Roles')
                                 <div class="invalid-feedback">
@@ -56,33 +58,6 @@
                                     </div>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="gedung" class="form-label">Gedung</label>
-                            <select class="form-select" aria-label="Default select example" id="gedung" name="gedung_id">
-                                @foreach ($gedungs as $gedung)
-                                    <option value="{{ $gedung->id }}" {{ old('gedung_id', $user->gedung_id) == $gedung->id ? 'selected' : '' }}>{{ $gedung->nama_gedung }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="lantai" class="form-label">Lantai</label>
-                            <select class="form-select" aria-label="Default select example" id="lantai" name="lantai_id">
-                                @foreach ($lantais as $lantai)
-                                    <option value="{{ $lantai->id }}" {{ old('lantai_id', $user->lantai_id) == $lantai->id ? 'selected' : '' }}>{{ $lantai->nama_lantai }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="ruangan" class="form-label">Ruangan</label>
-                            <select class="form-select" aria-label="Default select example" id="ruangan" name="ruangan_id">
-                                @foreach ($ruangans as $ruangan)
-                                    <option value="{{ $ruangan->id }}" {{ old('ruangan_id', $user->ruangan_id) == $ruangan->id ? 'selected' : '' }}>{{ $ruangan->nama_ruangan }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary float-end">Simpan</button>

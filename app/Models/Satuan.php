@@ -9,7 +9,7 @@ class Satuan extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $guarded = ['id'];
+    protected $fillable = ['id_satuan', 'nama', 'deskripsi', 'subdivisi_id', 'user_id'];
 
     protected static function boot()
     {

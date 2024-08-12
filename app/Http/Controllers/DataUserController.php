@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Gedung;
-use App\Models\Lantai;
-use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +17,7 @@ class DataUserController extends Controller
     {
         return view('datauser.index', [
             'users'     => Auth::user(),
-            'datauser'  => User::all(),
-            'gedungs'   => Gedung::all(),
-            'lantais'   => Lantai::all(),
-            'ruangans'  => Ruangan::all()
+            'datauser'  => User::all()
         ]);
     }
 
@@ -32,11 +26,11 @@ class DataUserController extends Controller
      */
     public function create()
     {
+        $roles = ['admin', 'user', 'auditor']; // Daftar roles yang tersedia
+
         return view('datauser.create', [
-             'users'     => Auth::user(),
-             'gedungs'   => Gedung::all(),
-             'lantais'   => Lantai::all(),
-             'ruangans'  => Ruangan::all()
+             'users' => Auth::user(),
+             'roles' => $roles
         ]);
     }
 
@@ -48,9 +42,7 @@ class DataUserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
-            'gedung_id' => 'nullable|exists:gedungs,id',
-            'lantai_id' => 'nullable|exists:lantais,id',
-            'ruangan_id' => 'nullable|exists:ruangans,id',
+            'Roles' => 'required'
         ]);
 
         $validatedData['password'] = bcrypt('password');
@@ -66,12 +58,12 @@ class DataUserController extends Controller
      */
     public function edit($id)
     {
+        $roles = ['admin', 'user', 'auditor']; // Daftar roles yang tersedia
+
         return view('datauser.edit', [
-            'users'     => Auth::user(),
-            'user'      => User::findOrFail($id),
-            'gedungs'   => Gedung::all(),
-            'lantais'   => Lantai::all(),
-            'ruangans'  => Ruangan::all()
+            'users' => Auth::user(),
+            'user'  => User::findOrFail($id),
+            'roles' => $roles
         ]);
     }
 
@@ -83,17 +75,17 @@ class DataUserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,'.$id,
-            'gedung_id' => 'nullable|exists:gedungs,id',
-            'lantai_id' => 'nullable|exists:lantais,id',
-            'ruangan_id' => 'nullable|exists:ruangans,id',
+            'Roles' => 'required'
         ]);
     
         $user = User::findOrFail($id);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
-        $user->gedung_id = $validatedData['gedung_id'];
-        $user->lantai_id = $validatedData['lantai_id'];
-        $user->ruangan_id = $validatedData['ruangan_id'];
+        $user->Roles = $validatedData['Roles'];
+    
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
     
         $user->save();
     

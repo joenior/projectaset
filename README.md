@@ -1,4 +1,4 @@
-# Sistem Manajemen Aset Laravel
+# Sistem Informasi Aset Laravel
 
 <p align="center">
     <a href="https://laravel.com" target="_blank">
@@ -23,23 +23,23 @@
 
 ## Pengenalan
 
-Selamat datang di Sistem Manajemen Aset Laravel! Proyek ini dirancang untuk membantu organisasi mengelola aset mereka dengan efisien. Dari melacak detail aset hingga menghasilkan laporan keuangan, sistem ini menyediakan solusi komprehensif untuk manajemen aset.
+Selamat datang di Sistem Informasi Aset Laravel! Proyek ini dirancang untuk membantu organisasi mengelola aset mereka dengan efisien. Dari melacak detail aset hingga menghasilkan laporan keuangan, sistem ini menyediakan solusi komprehensif untuk informasi data aset.
 
 ## Fitur
 
-- **Manajemen Aset**: Tambah, edit, dan hapus aset dengan deskripsi dan gambar yang detail.
+- **Aset**: Tambah, edit, dan hapus aset dengan deskripsi dan gambar yang detail.
 - **Pelacakan Lokasi**: Kelola dan tetapkan lokasi untuk aset.
 - **Laporan Keuangan**: Hasilkan dan cetak laporan keuangan.
 - **Generasi Kode QR**: Hasilkan kode QR untuk aset untuk pelacakan yang mudah.
-- **Manajemen Pengguna**: Kontrol akses berbasis peran untuk berbagai jenis pengguna.
+- **Pengguna**: Kontrol akses berbasis peran untuk berbagai jenis pengguna.
 - **Notifikasi**: Notifikasi real-time untuk pembaruan status aset.
 
 ## Instalasi
 
 1. **Klon repositori:**
     ```bash
-    git clone https://github.com/yourusername/asset-management-system.git
-    cd asset-management-system
+    git clone https://github.com/joenior/projectaset
+    cd projectaset
     ```
 
 2. **Instal dependensi:**
@@ -83,22 +83,6 @@ Untuk menghasilkan laporan keuangan, pergi ke bagian "Laporan Keuangan". Pilih r
 
 Setiap aset memiliki kode QR unik yang dapat dipindai untuk akses cepat ke detailnya. Kode QR dihasilkan secara otomatis saat Anda menambahkan aset baru.
 
-## Struktur Kode
-
-Proyek ini mengikuti struktur MVC standar Laravel. Berikut adalah beberapa file kunci dan tujuannya:
-
-- **Controllers**: Menangani logika bisnis aplikasi.
-    - `app/Http/Controllers/PengadaanController.php` (startLine: 41, endLine: 146)
-    - `app/Http/Controllers/LaporanController.php` (startLine: 1, endLine: 113)
-
-- **Views**: Template Blade untuk frontend.
-    - `resources/views/pengadaan/create.blade.php` (startLine: 1, endLine: 92)
-    - `resources/views/keuangan/index.blade.php` (startLine: 1, endLine: 66)
-
-- **Migrations**: Definisi skema database.
-    - `database/migrations/2023_03_24_214123_create_pengadaans_table.php` (startLine: 1, endLine: 34)
-    - `database/migrations/2023_03_24_232021_create_statuspengadaans_table.php` (startLine: 1, endLine: 32)
-
 ## Kontribusi
 
 Kami menyambut kontribusi dari komunitas! Jika Anda ingin berkontribusi, silakan fork repositori dan buat pull request dengan perubahan Anda. Pastikan untuk mengikuti standar pengkodean dan menyertakan tes untuk fitur baru.
@@ -107,7 +91,7 @@ Kami menyambut kontribusi dari komunitas! Jika Anda ingin berkontribusi, silakan
 
 Proyek ini bersifat open-source dan dilisensikan di bawah Lisensi MIT. Lihat file [LICENSE](LICENSE) untuk informasi lebih lanjut.
 
-## Penghargaan
+## Credits
 
 - [Laravel](https://laravel.com) - Framework PHP untuk web artisan.
 - [Bootstrap](https://getbootstrap.com) - Untuk komponen UI responsif.
@@ -115,4 +99,4 @@ Proyek ini bersifat open-source dan dilisensikan di bawah Lisensi MIT. Lihat fil
 
 ---
 
-Terima kasih telah menggunakan Sistem Manajemen Aset Laravel! Jika Anda memiliki pertanyaan atau masukan, jangan ragu untuk membuka issue di GitHub.
+Terima kasih telah menggunakan Sistem Informasi Aset Laravel! Jika Anda memiliki pertanyaan atau masukan, jangan ragu untuk membuka issue di GitHub.

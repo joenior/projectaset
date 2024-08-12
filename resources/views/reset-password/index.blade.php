@@ -34,7 +34,7 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="konfirmasiPassword" class="form-label @error('konfirmasiPassword') is-invalid @enderror">konfirmasi password</label>
+                        <label for="konfirmasiPassword" class="form-label @error('konfirmasiPassword') is-invalid @enderror">Masukkan konfirmasi password baru</label>
                         <input type="password" class="form-control" id="konfirmasiPassword" name="konfirmasiPassword" required>
                         @error('konfirmasiPassword')
                             <div class="invalid-feedback">

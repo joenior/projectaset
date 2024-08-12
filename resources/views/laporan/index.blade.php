@@ -87,8 +87,8 @@
 
         if (!tglMulai || !tglSelesai) {
             Swal.fire(
-                'Ooppss',
-                'Harap Masukan Kolom Tanggal Mulai Dan Selesai Terlebih Dahulu',
+                'Kesalahan',
+                'Harap isi tanggal mulai dan tanggal selesai terlebih dahulu',
                 'warning'
             )
             return false;

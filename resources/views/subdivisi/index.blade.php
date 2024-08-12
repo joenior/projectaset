@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+@if (auth()->user()->roles === 'admin')
     <a class="btn btn-primary float-end" href="/subdivisi/create" role="button"><i class="bi bi-diagram-3"></i> Tambah Subdivisi</a>
+@endif
     <h1 class="h3 mb-4">Data Subdivisi</h1>
    
     <div class="row">
@@ -16,7 +18,9 @@
                                     <th>ID Subdivisi</th>
                                     <th>Nama Subdivisi</th>
                                     <th>Deskripsi</th>
+                                    @if (auth()->user()->roles === 'admin')
                                     <th>Opsi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,6 +30,7 @@
                                         <td>{{ $subdivisi->id_subdivisi }}</td>
                                         <td>{{ $subdivisi->nama }}</td>
                                         <td>{{ $subdivisi->deskripsi }}</td>
+                                        @if (auth()->user()->roles === 'admin')
                                         <td>
                                             <a href="/subdivisi/{{ $subdivisi->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
                                             <form action="/subdivisi/{{ $subdivisi->id }}" method="POST" class="d-inline">
@@ -34,6 +39,7 @@
                                                 <button class="btn btn-danger mb-2" onclick="return confirm('Apakah Anda yakin ingin menghapus subdivisi ini?')"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>  
                                 @endforeach                     
                             </tbody>

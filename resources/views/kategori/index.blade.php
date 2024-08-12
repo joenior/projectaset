@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+@if (auth()->user()->roles === 'admin')
     <a class="btn btn-primary float-end" href="/kategori/create" Roles="button"><i class="bi bi-tags"></i> Tambah Kategori</a>
+@endif
     <h1 class="h3 mb-4">Data Kategori</h1>
    
     <div class="row">
@@ -16,7 +18,9 @@
                                     <th>ID Kategori</th>
                                     <th>Nama Kategori</th>
                                     <th>Deskripsi</th>
+                                    @if (auth()->user()->roles === 'admin')
                                     <th>Opsi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,6 +30,7 @@
                                         <td>{{ $kategori->id_kategoris }}</td>
                                         <td>{{ $kategori->nama }}</td>
                                         <td>{!! $kategori->deskripsi !!}</td>
+                                        @if (auth()->user()->roles === 'admin')
                                         <td>  
                                             <a href="/kategori/{{ $kategori->id }}/edit" class="btn btn-warning  mb-2"><i class="bi bi-pencil-fill"></i></a>
                                             <form id="{{ $kategori->id }}" action="/kategori/{{ $kategori->id }}" method="POST" class="d-inline">
@@ -34,6 +39,7 @@
                                                 <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $kategori->id }}"><i class="bi bi-trash-fill"></i></div>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>  
                                 @endforeach                     
                             </tbody>

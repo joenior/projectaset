@@ -33,6 +33,15 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="subkategori_id" class="form-label">Subkategori</label>
+                                <select class="form-select" id="subkategori_id" name="subkategori_id">
+                                    @foreach ($subkategoris as $subkategori)
+                                        <option value="{{ $subkategori->id }}">{{ $subkategori->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
                     </div>

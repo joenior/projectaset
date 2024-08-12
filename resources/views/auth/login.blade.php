@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-body">
 
-            <h4 class="my-4" style="text-align: center">SISTEM INFORMASI MANAJEMEN ASET</h4>
+            <h4 class="my-4" style="text-align: center">SISTEM INFORMASI ASET</h4>
 
             <form action="{{ route('login') }}" method="POST" class="mb-3">
               @csrf

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Satuan;
+use App\Models\Subdivisi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +27,8 @@ class SatuanController extends Controller
      */
     public function create()
     {
-        return view('satuan.create', [
-            'users' => Auth::user(),
-        ]);
+        $subdivisis = Subdivisi::all();
+        return view('satuan.create', compact('subdivisis'));
     }
 
     /**
@@ -37,8 +37,9 @@ class SatuanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama'      => 'required',
-            'deskripsi' => 'required'
+            'nama' => 'required',
+            'deskripsi' => 'nullable',
+            'subdivisi_id' => 'required|exists:subdivisis,id',
         ]);
 
         $validated['user_id'] = auth()->user()->id;
@@ -61,9 +62,11 @@ class SatuanController extends Controller
      */
     public function edit(Satuan $satuan)
     {
+        $subdivisis = Subdivisi::all();
         return view('satuan.edit', [
             'users'  => Auth::user(),
-            'satuan' => $satuan
+            'satuan' => $satuan,
+            'subdivisis' => $subdivisis
         ]);
     }
 
@@ -72,17 +75,15 @@ class SatuanController extends Controller
      */
     public function update(Request $request, Satuan $satuan)
     {
-        $rules = [
-            'nama'      => 'required',
-            'deskripsi' => 'required',
-        ];
-
-        $validated = $request->validate($rules);
+        $validated = $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'nullable',
+            'subdivisi_id' => 'required|exists:subdivisis,id',
+        ]);
 
         $validated['user_id'] = auth()->user()->id;
 
-        Satuan::where('id', $satuan->id)
-            ->update($validated);
+        $satuan->update($validated);
         
         Alert::success('Berhasil !', 'Berhasil Mengedit Satuan');
         return redirect('/satuan');

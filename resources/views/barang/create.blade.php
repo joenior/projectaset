@@ -17,101 +17,75 @@
                             <!-- Data Master Barang -->
                             <h2 class="h4 mb-3">Data Master Barang</h2>
 
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama Barang</label>
-                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama">
-                                @error('nama')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="nama" class="form-label">Nama Barang</label>
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama">
+                                        @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
-                            </div>
 
-                            <div class="mb-3">
-                                <label for="harga" class="form-label">Harga</label>
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">Rp</span>
-                                    <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" step="0.01" value="{{ old('harga') }}">
-                                    @error('harga')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    <div class="mb-3">
+                                        <label for="harga" class="form-label">Harga</label>
+                                        <div class="input-group flex-nowrap">
+                                            <span class="input-group-text" id="addon-wrapping">Rp</span>
+                                            <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" step="0.01" value="{{ old('harga') }}">
+                                            @error('harga')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="kategori" class="form-label">Kategori</label>
-                                <select class="form-select" id="kategori" name="kategori_id">
-                                    <option value="">Pilih Kategori</option>
-                                    @foreach ($kategoris as $kategori)
-                                        <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="subkategori" class="form-label">Subkategori</label>
-                                <select class="form-select" id="subkategori" name="subkategori_id" disabled>
-                                    <option value="">Pilih Subkategori</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="subdivisi" class="form-label">Subdivisi</label>
-                                <select class="form-select" id="subdivisi" name="subdivisi_id" disabled>
-                                    <option value="">Pilih Subdivisi</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="satuan" class="form-label">Satuan</label>
-                                <select class="form-select" id="satuan" name="satuan_id" disabled>
-                                    <option value="">Pilih Satuan</option>
-                                </select>
-                            </div>
-
-                            <!-- Data Master Lokasi -->
-                            <h2 class="h4 mb-3">Data Master Lokasi</h2>
-
-                            <div class="mb-3">
-                                <label for="gedung" class="form-label">Gedung</label>
-                                <select class="form-select" id="gedung" name="gedung_id">
-                                    <option value="">Pilih Gedung</option>
-                                    @foreach ($gedungs as $gedung)
-                                        <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="lantai" class="form-label">Lantai</label>
-                                <select class="form-select" id="lantai" name="lantai_id" disabled>
-                                    <option value="">Pilih Lantai</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="ruangan" class="form-label">Ruangan</label>
-                                <select class="form-select" id="ruangan" name="ruangan_id" disabled>
-                                    <option value="">Pilih Ruangan</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tanggal" class="form-label">Tanggal</label>
-                                <input class="form-control" type="text" value="{{ date('d/m/Y') }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label">Gambar</label>
-                                <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" onchange="previewImage()">
-                                <img src="" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 250px; overflow:hidden; border: 1px solid black;">
-                                @error('gambar')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
                                     </div>
-                                @enderror
+
+                                    <div class="mb-3">
+                                        <label for="kategori" class="form-label">Kategori</label>
+                                        <select class="form-select" id="kategori" name="kategori_id">
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach ($kategoris as $kategori)
+                                                <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="subkategori" class="form-label">Subkategori</label>
+                                        <select class="form-select" id="subkategori" name="subkategori_id" disabled>
+                                            <option value="">Pilih Subkategori</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="subdivisi" class="form-label">Subdivisi</label>
+                                        <select class="form-select" id="subdivisi" name="subdivisi_id" disabled>
+                                            <option value="">Pilih Subdivisi</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="satuan" class="form-label">Satuan</label>
+                                        <select class="form-select" id="satuan" name="satuan_id" disabled>
+                                            <option value="">Pilih Satuan</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="gambar" class="form-label">Gambar</label>
+                                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" onchange="previewImage()">
+                                        <img src="" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 250px; overflow:hidden; border: 1px solid black;">
+                                        @error('gambar')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -122,6 +96,44 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+
+                            <!-- Data Master Lokasi -->
+                            <h2 class="h4 mb-3">Data Master Lokasi</h2>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="gedung" class="form-label">Gedung</label>
+                                        <select class="form-select" id="gedung" name="gedung_id">
+                                            <option value="">Pilih Gedung</option>
+                                            @foreach ($gedungs as $gedung)
+                                                <option value="{{ $gedung->id }}">{{ $gedung->nama_gedung }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="lantai" class="form-label">Lantai</label>
+                                        <select class="form-select" id="lantai" name="lantai_id" disabled>
+                                            <option value="">Pilih Lantai</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="ruangan" class="form-label">Ruangan</label>
+                                        <select class="form-select" id="ruangan" name="ruangan_id" disabled>
+                                            <option value="">Pilih Ruangan</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="tanggal" class="form-label">Tanggal</label>
+                                        <input class="form-control" type="text" value="{{ date('d/m/Y') }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary float-end">Simpan</button>

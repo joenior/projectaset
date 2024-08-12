@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subkategori;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class SubkategoriController extends Controller
@@ -15,7 +16,8 @@ class SubkategoriController extends Controller
 
     public function create()
     {
-        return view('subkategori.create');
+        $kategoris = Kategori::all();
+        return view('subkategori.create', compact('kategoris'));
     }
 
     public function store(Request $request)
@@ -23,6 +25,7 @@ class SubkategoriController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'deskripsi' => 'nullable',
+            'kategori_id' => 'required|exists:kategoris,id',
         ]);
 
         Subkategori::create($validated);
@@ -31,7 +34,8 @@ class SubkategoriController extends Controller
 
     public function edit(Subkategori $subkategori)
     {
-        return view('subkategori.edit', compact('subkategori'));
+        $kategoris = Kategori::all();
+        return view('subkategori.edit', compact('subkategori', 'kategoris'));
     }
 
     public function update(Request $request, Subkategori $subkategori)
@@ -39,6 +43,7 @@ class SubkategoriController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'deskripsi' => 'nullable',
+            'kategori_id' => 'required|exists:kategoris,id',
         ]);
 
         $subkategori->update($validated);

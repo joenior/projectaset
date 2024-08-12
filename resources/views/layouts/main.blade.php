@@ -14,7 +14,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title>Sistem Informasi Manajemen Aset</title>
+    <title>Sistem Informasi Aset</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link href="/asset/css/app.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="/">
-                    <span class="align-middle">Simaset</span>
+               <span class="align-middle">Simaset</span>
                 </a>
 
                 <ul class="sidebar-nav">
@@ -238,7 +238,7 @@
             var form = $(this).attr('data-form');
             Swal.fire({
                 title: 'Hapus Data?',
-                text: "Data yang dihapus tidak akan bisa dikembalikan",
+                text: "Data yang dihapus akan masuk ke riwayat penghapusan.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

@@ -9,7 +9,7 @@ class Subdivisi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_subdivisi', 'nama', 'deskripsi'];
+    protected $fillable = ['id_subkategori', 'id_subdivisi', 'nama', 'deskripsi', 'subkategori_id'];
 
     protected static function boot()
     {
@@ -21,8 +21,8 @@ class Subdivisi extends Model
         });
     }
 
-    public function satuans()
+    public function subkategori()
     {
-        return $this->hasMany(Satuan::class);
+        return $this->belongsTo(Subkategori::class);
     }
 }
