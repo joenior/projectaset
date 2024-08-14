@@ -97,4 +97,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Subdivisi::class);
     }
+
+    public function riwayatPemindahan()
+    {
+        return $this->hasMany(RiwayatPemindahan::class);
+    }
 }

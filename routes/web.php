@@ -21,7 +21,7 @@ use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SubkategoriController;
 use App\Http\Controllers\SubdivisiController;
-
+use App\Http\Controllers\PemindahanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,3 +82,7 @@ Route::middleware(['auth', 'role:admin,auditor'])->group(function(){
 Route::middleware(['auth', 'role:admin,user,auditor'])->group(function(){
     Route::resource('/barang', BarangController::class);
 });
+
+Route::get('/pemindahan', [PemindahanController::class, 'index'])->name('pemindahan.index');
+Route::get('/pemindahan/create/{id}', [PemindahanController::class, 'create'])->name('pemindahan.create');
+Route::post('/pemindahan/store/{id}', [PemindahanController::class, 'store'])->name('pemindahan.store');

@@ -54,6 +54,7 @@
                                                     @csrf
                                                     <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $barang->id }}"><i class="bi bi-trash-fill"></i></div>
                                                 </form>
+                                                <a href="{{ route('pemindahan.create', $barang->id) }}" class="btn btn-warning my-1"><i class="bi bi-arrow-repeat"></i> Pindahkan </a>
                                             </td>
                                         @endif
                                     </tr>  

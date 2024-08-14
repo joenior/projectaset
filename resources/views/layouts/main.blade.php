@@ -133,7 +133,11 @@
                                 <i class="bi bi-clock-history"></i> <span class="align-middle">Penghapusan Aset</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item">
+                          <a class="sidebar-link" href="/pemindahan">
+                          <i class="bi bi-arrow-repeat"></i> <span class="align-middle">Pemindahan Aset</span>
+                          </a>
+                         </li>
                         <li class="sidebar-header">
                             Pengaturan
                         </li>
