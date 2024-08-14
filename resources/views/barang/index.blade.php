@@ -47,6 +47,7 @@
                                         <!-- <td>{{ $barang->pengadaan?->id_pengadaans }}</td> -->
                                         @if (auth()->user()->roles === 'admin')
                                             <td>
+                                                <a href="{{ route('pemindahan.create', $barang->id) }}" class="btn btn-warning mb-2"><i class="bi bi-arrows-move"></i></a>
                                                 <a href="/barang/{{ $barang->id }}" class="btn btn-success mb-2"><i class="bi bi-eye-fill"></i></a>
                                                 <a href="/barang/{{ $barang->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
                                                 <form id="{{ $barang->id }}" action="/barang/{{ $barang->id }}" method="POST" class="d-inline">
@@ -54,7 +55,7 @@
                                                     @csrf
                                                     <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $barang->id }}"><i class="bi bi-trash-fill"></i></div>
                                                 </form>
-                                                <a href="{{ route('pemindahan.create', $barang->id) }}" class="btn btn-warning my-1"><i class="bi bi-arrow-repeat"></i> Pindahkan </a>
+                                                
                                             </td>
                                         @endif
                                     </tr>  

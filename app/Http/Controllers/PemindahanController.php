@@ -31,15 +31,19 @@ class PemindahanController extends Controller
         ]);
 
         $barang = Barang::findOrFail($id);
-        $barang->update($validated);
 
         RiwayatPemindahan::create([
             'barang_id' => $barang->id,
             'gedung_id' => $validated['gedung_id'],
             'lantai_id' => $validated['lantai_id'],
             'ruangan_id' => $validated['ruangan_id'],
+            'previous_gedung_id' => $barang->gedung_id,
+            'previous_lantai_id' => $barang->lantai_id,
+            'previous_ruangan_id' => $barang->ruangan_id,
             'tanggal_pemindahan' => now(),
         ]);
+
+        $barang->update($validated);
 
         Alert::success('Berhasil', 'Berhasil Memindahkan Lokasi Barang');
         return redirect('/barang');
@@ -47,7 +51,7 @@ class PemindahanController extends Controller
 
     public function index()
     {
-        $riwayatPemindahans = RiwayatPemindahan::with(['barang', 'gedung', 'lantai', 'ruangan'])->get();
+        $riwayatPemindahans = RiwayatPemindahan::with(['barang', 'gedung', 'lantai', 'ruangan', 'previousGedung', 'previousLantai', 'previousRuangan'])->get();
 
         return view('pemindahan.index', compact('riwayatPemindahans'));
     }

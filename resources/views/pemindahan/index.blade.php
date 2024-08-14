@@ -13,9 +13,12 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Barang</th>
-                                    <th>Gedung</th>
-                                    <th>Lantai</th>
-                                    <th>Ruangan</th>
+                                    <th>Gedung Sebelumnya</th>
+                                    <th>Lantai Sebelumnya</th>
+                                    <th>Ruangan Sebelumnya</th>
+                                    <th>Gedung Setelah</th>
+                                    <th>Lantai Setelah</th>
+                                    <th>Ruangan Setelah</th>
                                     <th>Tanggal Pemindahan</th>
                                 </tr>
                             </thead>
@@ -24,6 +27,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $riwayat->barang->nama }}</td>
+                                        <td>{{ $riwayat->previousGedung->nama_gedung ?? 'N/A' }}</td>
+                                        <td>{{ $riwayat->previousLantai->nama_lantai ?? 'N/A' }}</td>
+                                        <td>{{ $riwayat->previousRuangan->nama_ruangan ?? 'N/A' }}</td>
                                         <td>{{ $riwayat->gedung->nama_gedung }}</td>
                                         <td>{{ $riwayat->lantai->nama_lantai }}</td>
                                         <td>{{ $riwayat->ruangan->nama_ruangan }}</td>

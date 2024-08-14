@@ -14,6 +14,9 @@ class RiwayatPemindahan extends Model
         'gedung_id',
         'lantai_id',
         'ruangan_id',
+        'previous_gedung_id',
+        'previous_lantai_id',
+        'previous_ruangan_id',
         'tanggal_pemindahan',
     ];
 
@@ -35,5 +38,20 @@ class RiwayatPemindahan extends Model
     public function ruangan()
     {
         return $this->belongsTo(Ruangan::class);
+    }
+
+    public function previousGedung()
+    {
+        return $this->belongsTo(Gedung::class, 'previous_gedung_id');
+    }
+
+    public function previousLantai()
+    {
+        return $this->belongsTo(Lantai::class, 'previous_lantai_id');
+    }
+
+    public function previousRuangan()
+    {
+        return $this->belongsTo(Ruangan::class, 'previous_ruangan_id');
     }
 }

@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('gedung_id')->constrained()->onDelete('cascade');
             $table->foreignId('lantai_id')->constrained()->onDelete('cascade');
             $table->foreignId('ruangan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('previous_gedung_id')->nullable()->constrained('gedungs')->onDelete('cascade');
+            $table->foreignId('previous_lantai_id')->nullable()->constrained('lantais')->onDelete('cascade');
+            $table->foreignId('previous_ruangan_id')->nullable()->constrained('ruangans')->onDelete('cascade');
             $table->timestamp('tanggal_pemindahan');
             $table->timestamps();
         });
