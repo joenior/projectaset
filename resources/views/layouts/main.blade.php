@@ -33,13 +33,15 @@
                 </a>
 
                 <ul class="sidebar-nav">
-                    @if (auth()->user()->roles === 'admin')
+                @if (in_array(auth()->user()->roles, ['admin', 'auditor', 'user']))
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/home">
                                 <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
-
+                
+                        @endif        
+                        @if (auth()->user()->roles === 'admin')
                         <li class="sidebar-header">
                             Data User
                         </li>
@@ -48,7 +50,24 @@
                                 <i class="bi bi-people"></i> <span class="align-middle">Data User</span>
                             </a>
                         </li>
-                    @endif
+                   @endif
+                   @if (auth()->user()->roles === 'admin')
+                    <li class="sidebar-header">
+                            Data Pengadaan
+                        </li>
+                    
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/pengadaan/">
+                                <i class="bi bi-box"></i> <span class="align-middle">Pengajuan</span>
+                            </a>
+                        </li>
+                        @elseif (auth()->user()->roles === 'user')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/permintaan/">
+                                <i class="bi bi-box"></i> <span class="align-middle">Permintaan</span>
+                            </a>
+                        </li>
+                        @endif
 
                     <li class="sidebar-header">
                         Data Master Aset
@@ -98,6 +117,7 @@
                                 <i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
                             </a>
                         </li>
+                        @elseif (auth()->user()->roles === 'admin')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/label/">
                                 <i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
@@ -147,7 +167,7 @@
                             </a>
                         </li>
                     @endif
-                </ul>
+                    </ul>
             </div>
         </nav>
 

@@ -73,19 +73,21 @@ class SatuanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Satuan $satuan)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        \Log::info("Update dipanggil untuk ID: " . $id);
+
+        $rules = [
             'nama' => 'required',
-            'deskripsi' => 'nullable',
-            'subdivisi_id' => 'required|exists:subdivisis,id',
-        ]);
+            'deskripsi' => 'required',
+        ];
 
-        $validated['user_id'] = auth()->user()->id;
+        $validated = $request->validate($rules);
 
+        $satuan = Satuan::findOrFail($id);
         $satuan->update($validated);
-        
-        Alert::success('Berhasil !', 'Berhasil Mengedit Satuan');
+
+        Alert::success('Berhasil', 'Berhasil Mengedit Satuan');
         return redirect('/satuan');
     }
 

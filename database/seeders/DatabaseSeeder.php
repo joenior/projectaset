@@ -8,7 +8,6 @@ use App\Models\Gedung;
 use App\Models\Lantai;
 use App\Models\Ruangan;
 use App\Models\Kategori;
-use App\Models\Pengadaan;
 use App\Models\Satuan;
 use App\Models\Subkategori;
 use App\Models\Subdivisi;
@@ -22,21 +21,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name'      => 'Admin User',
+            'name'      => 'Admin',
             'email'     => 'admin@example.com',
             'password'  => bcrypt('password'),
             'roles'     => 'admin'
         ]);
 
         User::create([
-            'name'      => 'Auditor User',
+            'name'      => 'Auditor',
             'email'     => 'auditor@example.com',
             'password'  => bcrypt('password'),
             'roles'     => 'auditor'
         ]);
 
         User::create([
-            'name'      => 'Regular User',
+            'name'      => 'Aproover',
             'email'     => 'user@example.com',
             'password'  => bcrypt('password'),
             'roles'     => 'user'
@@ -72,17 +71,6 @@ class DatabaseSeeder extends Seeder
             'user_id'      => 1
         ]);
         
-        Pengadaan::create([
-            'id_pengadaans' => 'P01',
-            'nama_pengadaan'=> 'Pengadaan Barang A',
-            'deskripsi'     => 'Deskripsi pengadaan barang A',
-            'quantity'      => 10,
-            'tanggal_pengajuan' => now(),
-            'user_id'       => 1,
-            'gedung_id'     => 1,
-            'lantai_id'     => 1,
-            'ruangan_id'    => 1
-        ]);
         
         Subkategori::create([
             'nama'      => 'Kursi',

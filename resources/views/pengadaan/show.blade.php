@@ -24,19 +24,6 @@
                       <table style="width:100%">
                         <hr>
                         <tr>
-                            <td><b>Status</b></td>
-                            <td>:</td>
-                            <td>
-                              @if ($status->status == 'pending')
-                                <span class="badge bg-warning text-dark">{{ $status->status }}</span>
-                              @elseif ($status->status == 'disetujui')
-                                <span class="badge bg-success">{{ $status->status }}</span>
-                              @else
-                                <span class="badge bg-danger">{{ $status->status }}</span>
-                              @endif
-                            </td>
-                        </tr>
-                        <tr>
                             <td><b>Tanggal Pengajuan</b></td>
                             <td>:</td>
                             <td>{{ $pengadaan->tanggal_pengajuan }}</td>
@@ -69,7 +56,7 @@
                         <tr>
                           <td><b>Catatan</b></td>
                           <td>:</td>
-                          <td>{!! $status->catatan !!}</td>
+                          <td>{!! $status ? $status->catatan : 'Tidak ada catatan' !!}</td>
                       </tr>
                     </table>
                 </div>

@@ -16,7 +16,7 @@
                             @csrf
 
                             <!-- Data Master Barang -->
-                            <h2 class="h4 mb-3">Data Master Barang</h2>
+                            <h2 class="h4 mb-3">Data Barang</h2>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -123,9 +123,14 @@
                                     </div>
                                 @enderror
                             </div>
-
+                            <div class="mb-3">
+                                        <label for="tanggal" class="form-label">Tanggal</label>
+                                        <input class="form-control" type="text" value="{{ date('d/m/Y', strtotime($barang->tanggal)) }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Data Master Lokasi -->
-                            <h2 class="h4 mb-3">Data Master Lokasi</h2>
+                            <!-- <h2 class="h4 mb-3">Data Lokasi</h2>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -168,14 +173,9 @@
                                                 @endif
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="mb-3">
-                                        <label for="tanggal" class="form-label">Tanggal</label>
-                                        <input class="form-control" type="text" value="{{ date('d/m/Y', strtotime($barang->tanggal)) }}" aria-label="Disabled input example" name="tanggal" disabled readonly>
-                                    </div>
-                                </div>
-                            </div>
+                                  
 
                             <button type="submit" class="btn btn-primary float-end">Simpan</button>
 

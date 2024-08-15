@@ -96,26 +96,28 @@ class StatusPengadaanController extends Controller
     }
 
     public function setPersetujuan($id)
-    {
-        Statuspengadaan::where('id', $id)
-            ->update([
-                'status'  => 'disetujui',
-                'user_id' => Auth::id()
-            ]);
-        Alert::success('Berhasil', 'Pengadaan Barang Disetujui');
-        return redirect()->back()->with('success', 'Persetujuan berhasil disimpan.');
-    }
+{
+    \Log::info("Setuju dipanggil untuk ID: " . $id);
+    Statuspengadaan::where('pengadaan_id', $id)
+        ->update([
+            'status'  => 'disetujui',
+            'user_id' => Auth::id()
+        ]);
+    Alert::success('Berhasil', 'Pengadaan Barang Disetujui');
+    return redirect()->back()->with('success', 'Persetujuan berhasil disimpan.');
+}
 
-    public function setPenolakan($id)
-    { 
-        Statuspengadaan::where('id', $id)
-            ->update([
-                'status' => 'ditolak',
-                'user_id' => Auth::id()
-            ]);
-        Alert::success('Berhasil', 'Pengadaan Barang Ditolak');
-        return redirect()->back()->with('success', 'Penolakan berhasil disimpan.');
-    }
+public function setPenolakan($id)
+{
+    \Log::info("Tolak dipanggil untuk ID: " . $id);
+    Statuspengadaan::where('pengadaan_id', $id)
+        ->update([
+            'status' => 'ditolak',
+            'user_id' => Auth::id()
+        ]);
+    Alert::success('Berhasil', 'Pengadaan Barang Ditolak');
+    return redirect()->back()->with('success', 'Penolakan berhasil disimpan.');
+}
 
     public function cetakPengadaanBarang($id)
     {

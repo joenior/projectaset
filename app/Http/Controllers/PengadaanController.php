@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Lokasi;
 use App\Models\Pengadaan;
+use App\Models\Gedung;
+use App\Models\Lantai;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Models\Statuspengadaan;
 use Illuminate\Support\Facades\DB;

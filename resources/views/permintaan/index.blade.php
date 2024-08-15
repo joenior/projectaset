@@ -50,7 +50,6 @@
                                             @else
                                                 <a href="/permintaan/{{ $permintaan->id }}/edit" class="btn btn-primary d-inline mb-2"><i class="bi bi-plus-square-fill"></i> Kirim Catatan</a>
                                             @endif
-                                            <a class="btn btn-primary" href="/permintaan/laporan-pengadaan/{{ $permintaan->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak</a>                    
                                         </td>
                                     </tr>  
                                 @endforeach                     
