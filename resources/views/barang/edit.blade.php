@@ -177,6 +177,16 @@
 
                                   
 
+                            <div class="mb-3">
+                                <label for="umur_ekonomis" class="form-label">Umur Ekonomis (tahun)</label>
+                                <input type="number" name="umur_ekonomis" class="form-control @error('umur_ekonomis') is-invalid @enderror" value="{{ old('umur_ekonomis', $barang->umur_ekonomis) }}">
+                                @error('umur_ekonomis')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                             <button type="submit" class="btn btn-primary float-end">Simpan</button>
 
                         </form>

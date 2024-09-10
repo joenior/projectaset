@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Satuan;
 use App\Models\Subdivisi;
+use App\Models\Subkategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SubkategoriController;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,10 +18,8 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        return view('satuan.index', [
-            'users'     => Auth::user(),
-            'satuans'   => Satuan::all()
-        ]);
+        $satuans = Satuan::with('subdivisi')->get();
+        return view('satuan.index', compact('satuans'));
     }
 
     /**
@@ -27,8 +27,9 @@ class SatuanController extends Controller
      */
     public function create()
     {
+        $subkategoris = Subkategori::all();
         $subdivisis = Subdivisi::all();
-        return view('satuan.create', compact('subdivisis'));
+        return view('satuan.create', compact('subkategoris', 'subdivisis'));
     }
 
     /**
@@ -45,7 +46,7 @@ class SatuanController extends Controller
         $validated['user_id'] = auth()->user()->id;
 
         Satuan::create($validated);
-        Alert::success('Berhasil', 'Berhasil Menambahkan Jenis Satuan Baru !');
+        Alert::success('Berhasil', 'Berhasil Menambahkan Unit Baru !');
         return redirect('/satuan');
     }
 
@@ -80,6 +81,7 @@ class SatuanController extends Controller
         $rules = [
             'nama' => 'required',
             'deskripsi' => 'required',
+            'subdivisi_id' => 'required|exists:subdivisis,id',
         ];
 
         $validated = $request->validate($rules);
@@ -96,6 +98,13 @@ class SatuanController extends Controller
      */
     public function destroy(Satuan $satuan)
     {
-        //
+        // Cek apakah satuan masih digunakan oleh barang
+        if ($satuan->barangs()->exists()) {
+            return redirect('/satuan')->with('error', 'Satuan ini tidak dapat dihapus karena masih digunakan oleh barang.');
+        }
+
+        $satuan->delete();
+        Alert::success('Berhasil', 'Berhasil menghapus Satuan');
+        return redirect('/satuan');
     }
 }

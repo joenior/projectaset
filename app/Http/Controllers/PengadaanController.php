@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Ramsey\Uuid\Uuid;
 
 class PengadaanController extends Controller
 {
@@ -42,9 +43,6 @@ class PengadaanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('pengadaan.create', [
@@ -55,38 +53,50 @@ class PengadaanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama_pengadaan'    => 'required',
-            'quantity'          => 'required|numeric',
-            'deskripsi'         => 'required',
-            'gedung_id'         => 'required',
-            'lantai_id'         => 'required',
-            'ruangan_id'        => 'required',
+        $request->validate([
+            'nama_pengadaan.*' => 'required|string|max:255',
+            'quantity.*' => 'required|integer',
+            'unit.*' => 'required|string',
+            'gedung_id' => 'required|exists:gedungs,id',
+            'lantai_id' => 'required|exists:lantais,id',
+            'ruangan_id' => 'required|exists:ruangans,id',
+            'deskripsi' => 'required|string',
         ]);
 
-        $validated['user_id'] = auth()->user()->id;
-        $validated['tanggal_pengajuan'] = now();
-        $validated['status'] = 'pending';
+        if (!is_array($request->nama_pengadaan)) {
+            return redirect()->back()->withErrors(['msg' => 'Invalid input data.']);
+        }
 
-        $pengadaan = Pengadaan::create($validated);
+        foreach ($request->nama_pengadaan as $index => $nama_pengadaan) {
+            $pengadaan = new Pengadaan();
+            $pengadaan->nama_pengadaan = $nama_pengadaan;
+            $pengadaan->quantity = $request->quantity[$index];
+            $pengadaan->unit = $request->unit[$index];
+            $pengadaan->gedung_id = $request->gedung_id;
+            $pengadaan->lantai_id = $request->lantai_id;
+            $pengadaan->ruangan_id = $request->ruangan_id;
+            $pengadaan->deskripsi = $request->deskripsi;
+            $pengadaan->tanggal_pengajuan = now();
+            $pengadaan->user_id = $request->user_id;
 
-        $status = new Statuspengadaan;
-        $status->status = 'pending';
-        $status->pengadaan_id = $pengadaan->id;
-        $status->save();
-        
-        Alert::success('Berhasil', 'Berhasil Mengajukan Pengadaan Barang');
+            // Generate unique id_pengadaans using Ramsey\Uuid\Uuid
+            $pengadaan->id_pengadaans = Uuid::uuid4()->toString();
+
+            $pengadaan->save();
+
+            $status = new Statuspengadaan;
+            $status->status = 'pending';
+            $status->pengadaan_id = $pengadaan->id;
+            $status->save();
+        }
+
+        Alert::success('Berhasil', 'Berhasil Mengajukan Barang');
         return redirect('/pengadaan');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show($id)
     {
         return view('pengadaan.show', [
@@ -96,9 +106,7 @@ class PengadaanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Pengadaan $pengadaan)
     {
         return view('pengadaan.edit', [
@@ -110,9 +118,6 @@ class PengadaanController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Pengadaan $pengadaan)
     {
         $rules = [
@@ -133,9 +138,7 @@ class PengadaanController extends Controller
         return redirect('/pengadaan');   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Pengadaan $pengadaan)
     {
         $pengadaan->delete();
@@ -143,5 +146,19 @@ class PengadaanController extends Controller
 
         Alert::success('Berhasil', 'Berhasil Menghapus Pengadaan');
         return redirect('/pengadaan');
+    }
+
+
+    public function approved()
+    {
+        $approvedPengadaans = Pengadaan::with('statuspengadaan')
+            ->whereHas('statuspengadaan', function ($query) {
+                $query->where('status', 'disetujui');
+            })->get();
+
+        return view('pengadaan.approved', [
+            'users' => Auth::user(),
+            'pengadaans' => $approvedPengadaans
+        ]);
     }
 }

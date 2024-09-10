@@ -75,4 +75,10 @@ class LantaiController extends Controller
         Alert::success('Berhasil', 'Berhasil Menghapus Lantai');
         return redirect('/lantai');
     }
+
+    public function getLantaiByGedung($gedung_id)
+    {
+        $lantais = Lantai::where('gedung_id', $gedung_id)->get();
+        return response()->json($lantais);
+    }
 }

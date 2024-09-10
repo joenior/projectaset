@@ -21,6 +21,7 @@ use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Pengadaan;
 
 class BarangController extends Controller
 {
@@ -78,7 +79,8 @@ class BarangController extends Controller
             'ruangan_id'    => 'required',
             'satuan_id'     => 'required',
             'subkategori_id' => 'required',
-            'subdivisi_id'   => 'required'
+            'subdivisi_id'   => 'required',
+            'umur_ekonomis' => 'required|numeric|min:1'
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -168,7 +170,8 @@ class BarangController extends Controller
             'ruangan_id'    => 'required',
             'satuan_id'     => 'required',
             'subkategori_id' => 'required',
-            'subdivisi_id'   => 'required'
+            'subdivisi_id'   => 'required',
+            'umur_ekonomis' => 'required|numeric|min:1'
         ];
 
         $validated = $request->validate($rules);
@@ -226,5 +229,93 @@ class BarangController extends Controller
         ]);
 
         return $pdf->stream('label.pdf');
+    }
+
+    public function createFromPengadaan(Request $request)
+    {
+        $pengadaan = Pengadaan::findOrFail($request->pengadaan_id);
+        $kategoris = Kategori::all();
+        $gedungs = Gedung::all();
+        $lantais = Lantai::all();
+        $ruangans = Ruangan::all();
+        $satuans = Satuan::all();
+        $subkategoris = Subkategori::all();
+        $subdivisis = Subdivisi::all();
+
+        return view('barang.create', [
+            'pengadaan' => $pengadaan,
+            'kategoris' => $kategoris,
+            'gedungs'   => $gedungs,
+            'lantais'   => $lantais,
+            'ruangans'  => $ruangans,
+            'satuans'   => $satuans,
+            'subkategoris' => $subkategoris,
+            'subdivisis' => $subdivisis
+        ]);
+    }
+
+    public function storeFromPengadaan($id)
+    {
+        \Log::info("storeFromPengadaan dipanggil untuk ID: " . $id);
+
+        $pengadaan = Pengadaan::findOrFail($id);
+
+        $barang = new Barang();
+        $barang->nama = $pengadaan->nama_pengadaan;
+        $barang->quantity = $pengadaan->quantity;
+        $barang->unit = $pengadaan->unit;
+        $barang->gedung_id = $pengadaan->gedung_id;
+        $barang->lantai_id = $pengadaan->lantai_id;
+        $barang->ruangan_id = $pengadaan->ruangan_id;
+        $barang->deskripsi = $pengadaan->deskripsi;
+        $barang->user_id = auth()->user()->id;
+
+        // Validasi relasi
+        if (!$pengadaan->kategori_id || !$pengadaan->subkategori_id || !$pengadaan->subdivisi_id || !$pengadaan->satuan_id) {
+            \Log::error("Validasi gagal untuk ID: " . $id);
+            return redirect()->back()->withErrors(['msg' => 'Kategori, Subkategori, Subdivisi, atau Satuan tidak valid.']);
+        }
+
+        $barang->kategori_id = $pengadaan->kategori_id;
+        $barang->subkategori_id = $pengadaan->subkategori_id;
+        $barang->subdivisi_id = $pengadaan->subdivisi_id;
+        $barang->satuan_id = $pengadaan->satuan_id;
+
+        $barang->save();
+
+        Alert::success('Berhasil', 'Barang berhasil ditambahkan dari pengadaan yang disetujui.');
+        return redirect('/barang');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+        if ($ids) {
+            Barang::whereIn('id', $ids)->delete();
+            return redirect()->route('barang.index')->with('success', 'Barang terpilih berhasil dihapus.');
+        }
+        return redirect()->route('barang.index')->with('error', 'Tidak ada barang yang dipilih.');
+    }
+
+    public function calculateDepreciation($id)
+    {
+        $barang = Barang::find($id);
+        $umurEkonomis = $barang->umur_ekonomis; 
+        $penyusutanPerTahun = $barang->harga / $umurEkonomis;
+        $tahunBerjalan = now()->year - $barang->tanggal->year;
+
+        // Tambahkan log untuk debugging
+        \Log::info("Harga Barang: {$barang->harga}");
+        \Log::info("Umur Ekonomis: {$umurEkonomis}");
+        \Log::info("Penyusutan Per Tahun: {$penyusutanPerTahun}");
+        \Log::info("Tahun Berjalan: {$tahunBerjalan}");
+        \Log::info("Tanggal Barang: {$barang->tanggal}");
+
+        $penyusutan = $penyusutanPerTahun * $tahunBerjalan;
+
+        $barang->penyusutan = $penyusutan;
+        $barang->save();
+
+        return redirect()->route('barang.show', $id)->with('success', 'Penyusutan berhasil dihitung.');
     }
 }

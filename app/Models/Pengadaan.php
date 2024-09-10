@@ -4,31 +4,44 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Pengadaan extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
+    protected $fillable = [
+        'nama_pengadaan',
+        'quantity',
+        'unit',
+        'gedung_id',
+        'lantai_id',
+        'ruangan_id',
+        'deskripsi',
+        'tanggal_pengajuan',
+        'user_id',
+        'id_pengadaans',
+    ];
 
-    protected static function boot()
-    {
-        parent::boot();
+    // Remove or comment out the boot method if it exists
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($model) {
-            $latest = static::latest()->first();
-            $model->id_pengadaans = 'P' . str_pad(($latest ? $latest->id + 1 : 1), 2, '0', STR_PAD_LEFT);
-        });
-    }
+    //     static::creating(function ($model) {
+    //         $latest = static::latest()->first();
+    //         $model->id_pengadaans = 'P' . str_pad(($latest ? $latest->id + 1 : 1), 2, '0', STR_PAD_LEFT);
+    //     });
+    // }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Statuspengadaan()
+    public function statuspengadaan()
     {
-        return $this->hasMany(Statuspengadaan::class);
+        return $this->hasOne(Statuspengadaan::class);
     }
 
     public function gedung()

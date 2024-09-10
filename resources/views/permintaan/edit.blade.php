@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="/permintaan/{{ $status->id }}" method="POST" enctype="multipart/form-data">
-                            @method('put')
+                            @method('PUT')
                             @csrf
 
                             <input type="hidden" name="id" value="{{ $status->id }}">

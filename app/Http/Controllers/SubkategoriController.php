@@ -10,8 +10,9 @@ class SubkategoriController extends Controller
 {
     public function index()
     {
-        $subkategories = Subkategori::all();
-        return view('subkategori.index', compact('subkategories'));
+        $subkategories = Subkategori::with('kategori')->get();
+        $kategoris = Kategori::all();
+        return view('subkategori.index', compact('subkategories', 'kategoris'));
     }
 
     public function create()
@@ -52,6 +53,11 @@ class SubkategoriController extends Controller
 
     public function destroy(Subkategori $subkategori)
     {
+        // Cek apakah subkategori masih digunakan oleh barang
+        if ($subkategori->barangs()->exists()) {
+            return redirect('/subkategori')->with('error', 'Subkategori ini tidak dapat dihapus karena masih digunakan oleh barang.');
+        }
+
         $subkategori->delete();
         return redirect('/subkategori')->with('success', 'Subkategori berhasil dihapus');
     }

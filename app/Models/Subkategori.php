@@ -30,4 +30,10 @@ class Subkategori extends Model
     {
         return $this->hasMany(Subdivisi::class);
     }
+
+    // Definisikan relasi one-to-many dengan model Barang
+    public function barangs()
+    {
+        return $this->hasMany(Barang::class, 'subkategori_id');
+    }
 }

@@ -26,7 +26,7 @@ class DataUserController extends Controller
      */
     public function create()
     {
-        $roles = ['admin', 'user', 'auditor']; // Daftar roles yang tersedia
+        $roles = ['admin', 'yayasan', 'unit']; // Daftar roles yang tersedia
 
         return view('datauser.create', [
              'users' => Auth::user(),
@@ -58,7 +58,7 @@ class DataUserController extends Controller
      */
     public function edit($id)
     {
-        $roles = ['admin', 'user', 'auditor']; // Daftar roles yang tersedia
+        $roles = ['admin', 'yayasan', 'unit']; // Daftar roles yang tersedia
 
         return view('datauser.edit', [
             'users' => Auth::user(),

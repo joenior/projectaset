@@ -25,7 +25,7 @@
                                     <th>Kategori</th>
                                     <th>Subkategori</th>
                                     <th>Subdivisi</th>
-                                    <!-- <th>Pengadaan</th> -->
+                                    <th>Penyusutan</th>
                                     @if (auth()->user()->roles === 'admin')
                                         <th>Opsi</th>
                                     @endif
@@ -35,7 +35,7 @@
                                 @foreach ($barangs as $barang)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('storage/'. $barang->gambar) }}" alt="gambar barang" style="width: 150px; height="150px"></td>
+                                        <td><img src="{{ asset('storage/'. $barang->gambar) }}" alt="gambar barang" style="width: 150px; height: 150px"></td>
                                         <td>{{ $barang->kode_barang }}</td>
                                         <td>{{ $barang->nama }}</td>
                                         <td>{{ $barang->gedung->nama_gedung }}</td>
@@ -44,18 +44,18 @@
                                         <td>{{ $barang->kategori->nama }}</td>
                                         <td>{{ $barang->subkategori->nama }}</td>
                                         <td>{{ $barang->subdivisi->nama }}</td>
-                                        <!-- <td>{{ $barang->pengadaan?->id_pengadaans }}</td> -->
+                                        <td>{{ $barang->penyusutan }}</td>
                                         @if (auth()->user()->roles === 'admin')
                                             <td>
                                                 <a href="{{ route('pemindahan.create', $barang->id) }}" class="btn btn-warning mb-2"><i class="bi bi-arrows-move"></i></a>
                                                 <a href="/barang/{{ $barang->id }}" class="btn btn-success mb-2"><i class="bi bi-eye-fill"></i></a>
                                                 <a href="/barang/{{ $barang->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>
+                                                <a href="{{ route('barang.calculateDepreciation', $barang->id) }}" class="btn btn-primary mb-2"><i class="bi bi-calculator"></i> Hitung Penyusutan</a>
                                                 <form id="{{ $barang->id }}" action="/barang/{{ $barang->id }}" method="POST" class="d-inline">
                                                     @method('delete')
                                                     @csrf
                                                     <div class="btn btn-danger mb-2 swal-confirm" data-form="{{ $barang->id }}"><i class="bi bi-trash-fill"></i></div>
                                                 </form>
-                                                
                                             </td>
                                         @endif
                                     </tr>  

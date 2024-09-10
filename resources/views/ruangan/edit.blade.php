@@ -30,6 +30,20 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="gedung_id" class="form-label">Gedung</label>
+                            <select class="form-control @error('gedung_id') is-invalid @enderror" id="gedung_id" name="gedung_id">
+                                <option value="">Pilih Gedung</option>
+                                @foreach ($gedungs as $gedung)
+                                    <option value="{{ $gedung->id }}" {{ $gedung->id == $ruangan->lantai->gedung_id ? 'selected' : '' }}>{{ $gedung->nama_gedung }}</option>
+                                @endforeach
+                            </select>
+                            @error('gedung_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="lantai_id" class="form-label">Lantai</label>
                             <select class="form-control @error('lantai_id') is-invalid @enderror" id="lantai_id" name="lantai_id">
                                 @foreach ($lantais as $lantai)
@@ -48,4 +62,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const gedungSelect = document.getElementById('gedung_id');
+            const lantaiSelect = document.getElementById('lantai_id');
+
+            gedungSelect.addEventListener('change', function () {
+                const gedungId = this.value;
+                lantaiSelect.disabled = true;
+                if (gedungId) {
+                    fetch(`/api/lantai/${gedungId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            lantaiSelect.innerHTML = '<option value="">Pilih Lantai</option>';
+                            data.forEach(lantai => {
+                                lantaiSelect.innerHTML += `<option value="${lantai.id}">${lantai.nama_lantai}</option>`;
+                            });
+                            lantaiSelect.disabled = false;
+                        });
+                }
+            });
+        });
+    </script>
 @endsection

@@ -75,10 +75,50 @@
                         <a class="btn btn-primary" href="/barang/label/{{ $barang->id }}" target="_blank" Roles="button"><i class="bi bi-printer"></i>&nbsp; Cetak Label</a>
                     </div>
                 </div>
+                    <div class="card">
+        <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                        <div class="card-title">Penyusutan</div>
+                <table class="table">
+                    <tr>
+                        <th>Nama</th>
+                        <td>{{ $barang->nama }}</td>
+                    </tr>
+                    <tr>
+                        <th>Deskripsi</th>
+                        <td>{{ $barang->deskripsi }}</td>
+                    </tr>
+                    <tr>
+                        <th>Harga</th>
+                        <td>{{ $barang->harga }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal</th>
+                        <td>{{ $barang->tanggal }}</td>
+                    </tr>
+                    <tr>
+                        <th>Penyusutan</th>
+                        <td data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Rumus: Penyusutan = (Harga / Umur Ekonomis) * Tahun Berjalan">{{ $barang->penyusutan }}</td>
+                    </tr>
+                </table>
+                <a href="{{ route('barang.calculateDepreciation', $barang->id) }}" class="btn btn-primary">Hitung Penyusutan</a>
+</div>
+        </div>
+        </div>
+        </div>
+    </div>
             </div>
         </div>
-        
     </div>
 </div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('[data-bs-toggle="popover"]').popover();   
+    });
+</script>
 
-@endsection
+    @endsection

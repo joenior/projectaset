@@ -78,13 +78,9 @@ class StatusPengadaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Statuspengadaan::where('id', $id)
-        ->update([
-            'catatan'  => $request->catatan,
-            'user_id' => Auth::id()
-        ]);
-        Alert::success('Berhasil !', 'Berhasil Mengirim Catatan');
-        return redirect('/permintaan');  
+        $status = Statuspengadaan::findOrFail($id);
+        $status->update($request->all());
+        return redirect('/permintaan')->with('success', 'Catatan berhasil diperbarui');
     }
 
     /**
@@ -96,28 +92,28 @@ class StatusPengadaanController extends Controller
     }
 
     public function setPersetujuan($id)
-{
-    \Log::info("Setuju dipanggil untuk ID: " . $id);
-    Statuspengadaan::where('pengadaan_id', $id)
-        ->update([
-            'status'  => 'disetujui',
-            'user_id' => Auth::id()
-        ]);
-    Alert::success('Berhasil', 'Pengadaan Barang Disetujui');
-    return redirect()->back()->with('success', 'Persetujuan berhasil disimpan.');
-}
+    {
+        \Log::info("Setuju dipanggil untuk ID: " . $id);
+        Statuspengadaan::where('pengadaan_id', $id)
+            ->update([
+                'status'  => 'disetujui',
+                'user_id' => Auth::id()
+            ]);
+        Alert::success('Berhasil', 'Permintaan Barang Disetujui');
+        return redirect()->back()->with('success', 'Persetujuan berhasil disimpan.');
+    }
 
-public function setPenolakan($id)
-{
-    \Log::info("Tolak dipanggil untuk ID: " . $id);
-    Statuspengadaan::where('pengadaan_id', $id)
-        ->update([
-            'status' => 'ditolak',
-            'user_id' => Auth::id()
-        ]);
-    Alert::success('Berhasil', 'Pengadaan Barang Ditolak');
-    return redirect()->back()->with('success', 'Penolakan berhasil disimpan.');
-}
+    public function setPenolakan($id)
+    {
+        \Log::info("Tolak dipanggil untuk ID: " . $id);
+        Statuspengadaan::where('pengadaan_id', $id)
+            ->update([
+                'status' => 'ditolak',
+                'user_id' => Auth::id()
+            ]);
+        Alert::success('Berhasil', 'Permintaan Barang Ditolak');
+        return redirect()->back()->with('success', 'Penolakan berhasil disimpan.');
+    }
 
     public function cetakPengadaanBarang($id)
     {

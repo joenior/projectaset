@@ -88,7 +88,7 @@
 			<p>Karangmulyo, RT.01, RW.02. Kec. Purwodadi, Kab. Purworejo</p>
 		</div>
 
-		<h2 style="text-align: center"> Pengadaan Barang </h2>
+		<h2 style="text-align: center"> Permintaan Barang </h2>
         <div class="row">
             <div class="col">
                 <div class="card" style="text-align: center">

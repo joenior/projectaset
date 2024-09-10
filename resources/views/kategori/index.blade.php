@@ -1,6 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 @if (auth()->user()->roles === 'admin')
     <a class="btn btn-primary float-end" href="/kategori/create" Roles="button"><i class="bi bi-tags"></i> Tambah Kategori</a>
 @endif

@@ -28,17 +28,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name'      => 'Auditor',
-            'email'     => 'auditor@example.com',
+            'name'      => 'Unit',
+            'email'     => 'unit@example.com',
             'password'  => bcrypt('password'),
-            'roles'     => 'auditor'
+            'roles'     => 'unit'
         ]);
 
         User::create([
-            'name'      => 'Aproover',
-            'email'     => 'user@example.com',
+            'name'      => 'Yayasan',
+            'email'     => 'yayasan@example.com',
             'password'  => bcrypt('password'),
-            'roles'     => 'user'
+            'roles'     => 'yayasan'
         ]);
 
         Gedung::create([

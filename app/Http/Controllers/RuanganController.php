@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use App\Models\Lantai;
+use App\Models\Gedung;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,10 +21,9 @@ class RuanganController extends Controller
 
     public function create()
     {
-        return view('ruangan.create', [
-            'users' => Auth::user(),
-            'lantais' => Lantai::all()
-        ]);
+        $gedungs = Gedung::all();
+        $lantais = Lantai::all();
+        return view('ruangan.create', compact('gedungs', 'lantais'));
     }
 
     public function store(Request $request)
@@ -31,6 +31,7 @@ class RuanganController extends Controller
         $validated = $request->validate([
             'nama_ruangan' => 'required',
             'deskripsi' => 'required',
+            'gedung_id' => 'required',
             'lantai_id' => 'required'
         ]);
 
@@ -46,6 +47,7 @@ class RuanganController extends Controller
         return view('ruangan.edit', [
             'users'  => Auth::user(),
             'ruangan' => $ruangan,
+            'gedungs' => Gedung::all(),
             'lantais' => Lantai::all()
         ]);
     }
@@ -55,6 +57,7 @@ class RuanganController extends Controller
         $rules = [
             'nama_ruangan' => 'required',
             'deskripsi' => 'required',
+            'gedung_id' => 'required',
             'lantai_id' => 'required'
         ];
 

@@ -30,4 +30,9 @@ class Satuan extends Model
     {
         return $this->hasMany(Barang::class);
     }
+
+    public function subdivisi()
+    {
+        return $this->belongsTo(Subdivisi::class);
+    }
 }

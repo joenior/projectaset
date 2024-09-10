@@ -17,11 +17,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Barang extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['kode_barang', 'gambar', 'nama', 'deskripsi', 'tanggal', 'harga', 'user_id', 'kategori_id', 'satuan_id', 'pengadaan_id', 'gedung_id', 'lantai_id', 'ruangan_id', 'subkategori_id', 'subdivisi_id', 'status'];
+    protected $fillable = [
+        'nama', 'deskripsi', 'harga', 'tanggal', 'penyusutan', 'kode_barang', 'gambar', 'user_id', 'kategori_id', 'satuan_id', 'gedung_id', 'lantai_id', 'ruangan_id', 'subkategori_id', 'subdivisi_id', 'status', 'umur_ekonomis'
+    ];
+
+    protected $casts = [
+        'tanggal' => 'datetime',
+    ];
 
     protected static function boot()
     {
@@ -32,6 +37,10 @@ class Barang extends Model
             $subkategori = Subkategori::find($model->subkategori_id);
             $subdivisi = Subdivisi::find($model->subdivisi_id);
             $satuan = Satuan::find($model->satuan_id);
+
+            if (!$kategori || !$subkategori || !$subdivisi || !$satuan) {
+                throw new \Exception('Kategori, Subkategori, Subdivisi, atau Satuan tidak ditemukan.');
+            }
 
             // Generate unique serial number
             $serial = str_pad(Barang::withTrashed()->max('id') + 1, 4, '0', STR_PAD_LEFT);

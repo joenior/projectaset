@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Gedung;
 use App\Models\Lantai;
-use App\Models\Ruangan;
 use App\Models\RiwayatPemindahan;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,5 +54,21 @@ class PemindahanController extends Controller
         $riwayatPemindahans = RiwayatPemindahan::with(['barang', 'gedung', 'lantai', 'ruangan', 'previousGedung', 'previousLantai', 'previousRuangan'])->get();
 
         return view('pemindahan.index', compact('riwayatPemindahans'));
+    }
+
+    public function destroy($id)
+    {
+        $riwayat = RiwayatPemindahan::findOrFail($id);
+        $riwayat->delete();
+
+        Alert::success('Berhasil', 'Riwayat pemindahan berhasil dihapus.');
+        return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $riwayat = RiwayatPemindahan::with(['barang', 'gedung', 'lantai', 'ruangan', 'previousGedung', 'previousLantai', 'previousRuangan'])->findOrFail($id);
+
+        return view('pemindahan.show', compact('riwayat'));
     }
 }

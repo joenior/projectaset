@@ -25,4 +25,20 @@ class Subdivisi extends Model
     {
         return $this->belongsTo(Subkategori::class);
     }
+
+    public function kategori()
+    {
+        return $this->hasOneThrough(Kategori::class, Subkategori::class, 'id', 'id', 'subkategori_id', 'kategori_id');
+    }
+
+    // Definisikan relasi one-to-many dengan model Barang
+    public function barangs()
+    {
+        return $this->hasMany(Barang::class, 'subdivisi_id');
+    }
+
+    public function satuans()
+    {
+        return $this->hasMany(Satuan::class);
+    }
 }

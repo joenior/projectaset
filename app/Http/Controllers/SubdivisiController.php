@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Subdivisi;
 use App\Models\Subkategori;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class SubdivisiController extends Controller
 {
     public function index()
     {
-        $subdivisis = Subdivisi::all();
-        return view('subdivisi.index', compact('subdivisis'));
+        $subdivisis = Subdivisi::with('subkategori.kategori')->get();
+        $kategoris = Kategori::all();
+        $subkategoris = Subkategori::all();
+        return view('subdivisi.index', compact('subdivisis', 'kategoris', 'subkategoris'));
     }
 
     public function create()
@@ -52,7 +55,18 @@ class SubdivisiController extends Controller
 
     public function destroy(Subdivisi $subdivisi)
     {
+        // Cek apakah subdivisi masih digunakan oleh barang
+        if ($subdivisi->barangs()->exists()) {
+            return redirect('/subdivisi')->with('error', 'Subdivisi tidak dapat dihapus karena masih digunakan oleh barang.');
+        }
+
         $subdivisi->delete();
         return redirect('/subdivisi')->with('success', 'Subdivisi berhasil dihapus');
+    }
+
+    public function getSubdivisiBySubkategori($subkategori_id)
+    {
+        $subdivisis = Subdivisi::where('subkategori_id', $subkategori_id)->get();
+        return response()->json($subdivisis);
     }
 }

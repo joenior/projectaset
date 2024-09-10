@@ -14,7 +14,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title>Sistem Informasi Aset</title>
+    <title>Sistem Informasi Manajemen Aset</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link href="/asset/css/app.css" rel="stylesheet">
@@ -33,7 +33,7 @@
                 </a>
 
                 <ul class="sidebar-nav">
-                @if (in_array(auth()->user()->roles, ['admin', 'auditor', 'user']))
+                @if (in_array(auth()->user()->roles, ['admin', 'unit', 'yayasan']))
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/home">
                                 <i class="bi bi-speedometer2"></i> <span class="align-middle">Dashboard</span>
@@ -51,24 +51,30 @@
                             </a>
                         </li>
                    @endif
-                   @if (auth()->user()->roles === 'admin')
-                    <li class="sidebar-header">
+                   <li class="sidebar-header">
                             Data Pengadaan
                         </li>
-                    
+                   @if (auth()->user()->roles === 'unit')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/pengadaan/">
                                 <i class="bi bi-box"></i> <span class="align-middle">Pengajuan</span>
                             </a>
                         </li>
-                        @elseif (auth()->user()->roles === 'user')
+                        @elseif (auth()->user()->roles === 'yayasan')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/permintaan/">
-                                <i class="bi bi-box"></i> <span class="align-middle">Permintaan</span>
+                                <i class="bi bi-box"></i> <span class="align-middle">Review Permintaan</span>
                             </a>
                         </li>
                         @endif
-
+                        @if (auth()->user()->roles === 'admin')
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="/pengadaan-disetujui">
+                                <i class="bi bi-check-circle"></i> <span class="align-middle">Permintaan Disetujui</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->roles === 'admin')
                     <li class="sidebar-header">
                         Data Master Aset
                     </li>
@@ -77,6 +83,8 @@
                             <i class="bi bi-collection"></i> <span class="align-middle">Data Barang</span>
                         </a>
                     </li>
+                    @endif
+                    @if (auth()->user()->roles === 'admin')
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/kategori/">
                             <i class="bi bi-tags"></i> <span class="align-middle">Kategori</span>
@@ -97,8 +105,8 @@
                             <i class="bi bi-hdd-stack"></i><span class="align-middle">Unit</span>
                         </a>
                     </li>
-
-                    @if (auth()->user()->roles === 'admin' || auth()->user()->roles === 'auditor')
+@endif
+                    @if (auth()->user()->roles === 'admin')
                         <li class="sidebar-header">
                             Laporan
                         </li>
@@ -117,7 +125,7 @@
                                 <i class="bi bi-journals"></i> <span class="align-middle">Cetak Laporan</span>
                             </a>
                         </li>
-                        @elseif (auth()->user()->roles === 'admin')
+                      
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="/label/">
                                 <i class="bi bi-qr-code"></i> <span class="align-middle">Cetak Label</span>
@@ -283,7 +291,7 @@
             var form = $(this).attr('data-form');
             Swal.fire({
                 title: 'Konfirmasi Persetujuan',
-                text: "Apakah Anda Yakin Ingin Menyetujui Pengadaan Barang Ini",
+                text: "Apakah Anda Yakin Ingin Menyetujui?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -304,7 +312,7 @@
             var form = $(this).attr('data-form');
             Swal.fire({
                 title: 'Konfirmasi Penolakan',
-                text: "Apakah Anda Yakin Ingin Menolak Pengadaan Barang Ini",
+                text: "Apakah Anda Yakin Ingin Menolak Permintaan Barang Ini",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

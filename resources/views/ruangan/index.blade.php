@@ -15,6 +15,7 @@
                                     <th>No</th>
                                     <th>Nama Ruangan</th>
                                     <th>Deskripsi</th>
+                                    <th>Gedung</th>
                                     <th>Lantai</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -25,6 +26,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ruangan->nama_ruangan }}</td>
                                         <td>{{ $ruangan->deskripsi }}</td>
+                                        <td>{{ $ruangan->lantai->gedung->nama_gedung }}</td>
                                         <td>{{ $ruangan->lantai->nama_lantai }}</td>
                                         <td>
                                             <a href="/ruangan/{{ $ruangan->id }}/edit" class="btn btn-warning mb-2"><i class="bi bi-pencil-fill"></i></a>

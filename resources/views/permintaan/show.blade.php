@@ -57,12 +57,12 @@
                         <tr>
                             <td><b>Catatan</b></td>
                             <td>:</td>
-                            <td>{!! $status ? $status->catatan : 'Tidak ada catatan' !!}</td>
+                            <td>{!! $status ? $status->catatan : 'Belum ada catatan yang ditambahkan oleh yayasan' !!}</td>
                       </tr>
 
                       <tr>
                         <td>
-                            Dikirim Oleh : Admin, {{ $pengadaan->user->name }}
+                            Dikirim Oleh : {{ $pengadaan->user->name }}
                         </td>
                       </tr>
                     </table>

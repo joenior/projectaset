@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="h3 mb-4">Data Permintaan Pengadaan barang</h1>
+    <h1 class="h3 mb-4">Review Permintaan barang</h1>
 
     <div class="row">
         <div class="col">

@@ -74,12 +74,12 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('/ruangan', RuanganController::class);
 });
 
-Route::middleware(['auth', 'role:admin,auditor'])->group(function(){
+Route::middleware(['auth', 'role:admin,unit'])->group(function(){
     Route::get('/laporan', [LaporanController::class, 'index']);
     Route::get('/laporan/cetak', [LaporanController::class, 'cetak']);
 });
 
-Route::middleware(['auth', 'role:admin,user,auditor'])->group(function(){
+Route::middleware(['auth', 'role:admin,yayasan,unit'])->group(function(){
     Route::resource('/barang', BarangController::class);
 });
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
@@ -90,13 +90,32 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
 Route::get('/pemindahan', [PemindahanController::class, 'index'])->name('pemindahan.index');
 Route::get('/pemindahan/create/{id}', [PemindahanController::class, 'create'])->name('pemindahan.create');
 Route::post('/pemindahan/store/{id}', [PemindahanController::class, 'store'])->name('pemindahan.store');
+Route::delete('/pemindahan/{id}', [PemindahanController::class, 'destroy'])->name('pemindahan.destroy');
 
-Route::group(['middleware' => ['auth', 'role:admin']], function(){
+Route::group(['middleware' => ['auth', 'role:yayasan']], function(){
     Route::put('/permintaan/{id}/setuju', [StatusPengadaanController::class, 'setPersetujuan'])->name('permintaan.setuju');
     Route::put('/permintaan/{id}/tolak', [StatusPengadaanController::class, 'setPenolakan'])->name('permintaan.tolak');
 });
 
-Route::get('/permintaan/{id}/edit', [StatusPengadaanController::class, 'edit'])->name('permintaan.edit');
-Route::put('/permintaan/{id}', [StatusPengadaanController::class, 'update'])->name('permintaan.update');
+Route::group(['middleware' => ['auth', 'role:yayasan']], function () {
+    Route::get('/permintaan/create', [StatusPengadaanController::class, 'create']);
+    Route::post('/permintaan', [StatusPengadaanController::class, 'store']);
+});
 
-Route::put('/satuan/{id}', [SatuanController::class, 'update'])->name('satuan.update');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/pengadaan-disetujui', [PengadaanController::class, 'approved'])->name('pengadaan.approved');
+});
+
+Route::post('/barang/from-pengadaan/{id}', [BarangController::class, 'storeFromPengadaan'])->name('barang.storeFromPengadaan');
+
+Route::delete('/satuan/{satuan}', [SatuanController::class, 'destroy'])->name('satuan.destroy');
+
+Route::get('/api/subdivisi/{subkategori_id}', [SubdivisiController::class, 'getSubdivisiBySubkategori']);
+
+Route::delete('/barang/bulk-delete', [BarangController::class, 'bulkDelete'])->name('barang.bulkDelete');
+
+Route::get('/api/lantai/{gedung_id}', [LantaiController::class, 'getLantaiByGedung']);
+
+Route::get('/barang/{id}/calculate-depreciation', [BarangController::class, 'calculateDepreciation'])->name('barang.calculateDepreciation');
+
+Route::get('/pemindahan/{id}', [PemindahanController::class, 'show'])->name('pemindahan.show');

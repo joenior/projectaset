@@ -7,8 +7,8 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h3>Sistem Informasi Aset</h3>
-                    <p>Sistem informasi Aset adalah sistem yang dirancang untuk membantu dalam mengelola aset. Aset dapat mencakup segala hal dari properti fisik seperti gedung, kendaraan, peralatan, dan inventaris</p>
+                    <h3>Sistem Informasi Manajemen Aset</h3>
+                    <p>Tagline here!!!</p>
                 </div>
             </div>
         </div>

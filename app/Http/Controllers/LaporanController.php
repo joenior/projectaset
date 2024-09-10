@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {           
         $mulai = $request->input('tgl_mulai');
@@ -38,9 +35,6 @@ class LaporanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -101,7 +95,6 @@ class LaporanController extends Controller
         $logoInstansiPath = storage_path('app/public/logo-instansi/logo.png');
         $logoInstansi = base64_encode(file_get_contents($logoInstansiPath));
 
-        $pdf = new Dompdf();
         $pdf = PDF::loadView('laporan.cetak', [
             'laporans'      => $laporans,
             'logoInstansi'  => $logoInstansi

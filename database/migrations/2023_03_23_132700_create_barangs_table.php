@@ -25,8 +25,9 @@ return new class extends Migration
             $table->foreignId('subkategori_id')->constrained();
             $table->foreignId('subdivisi_id')->constrained();
             $table->string('kode_barang')->unique();
-            $table->timestamp('tanggal');
+            $table->timestamp('tanggal')->nullable();
             $table->foreignId('user_id')->constrained();
+            $table->decimal('penyusutan', 15, 2)->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

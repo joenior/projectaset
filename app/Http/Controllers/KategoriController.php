@@ -99,6 +99,11 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
+        // Cek apakah kategori masih digunakan oleh subkategori
+        if ($kategori->subkategoris()->exists()) {
+            return redirect('/kategori')->with('error', 'Kategori ini tidak dapat dihapus karena masih digunakan oleh subkategori.');
+        }
+
         Kategori::destroy($kategori->id);
         Alert::success('Berhasil', 'Berhasil Menghapus Kategori');
         return redirect('/kategori');
